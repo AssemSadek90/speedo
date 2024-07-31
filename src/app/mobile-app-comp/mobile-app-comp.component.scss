@@ -1,0 +1,14 @@
+@import "../../shared/globalVariables";
+section{
+    background-color: $secondary-color;
+    font-family: 'Inter', sans-serif;
+}
+.title{
+    color: $primary-color;
+}
+.arrow{
+    fill: $primary-color;
+}
+span{
+    color: $tertiary-color;   
+}
