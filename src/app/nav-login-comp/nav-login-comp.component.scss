@@ -1,0 +1,15 @@
+@import '../../shared/_globalVariables';
+
+.prim-button{
+    background-color: $primary-color;
+} 
+.prim-button:hover{
+    background-color: darken($primary-color, 10%);
+}
+.second-button{
+    background-color: white;
+    color: black;
+}
+.second-button:hover{
+    background-color: darken(white, 20%);
+}
