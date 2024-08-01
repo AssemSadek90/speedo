@@ -5,14 +5,14 @@ import { MobileAppCompComponent } from './mobile-app-comp/mobile-app-comp.compon
 import { FooterCompComponent } from './footer-comp/footer-comp.component';
 import { TransferCompComponent } from "./transfer-comp/transfer-comp.component";
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { BannerCompComponent } from './banner-comp/banner-comp.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarCompComponent, MobileAppCompComponent, FooterCompComponent, TransferCompComponent,ReactiveFormsModule],
+  imports: [RouterOutlet, NavbarCompComponent, MobileAppCompComponent, FooterCompComponent, TransferCompComponent,ReactiveFormsModule, BannerCompComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent  {
   title = 'speedo';
