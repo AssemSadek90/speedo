@@ -1,30 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AmountCompComponent } from "../amount-comp/amount-comp.component";
 import { ConfirmationCompComponent } from "../confirmation-comp/confirmation-comp.component";
 import { PaymentCompComponent } from "../payment-comp/payment-comp.component";
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { SharedService } from '../../shared/services/shared.service';
-import { Subscription } from 'rxjs';
+import { GlobalService } from '../../shared/services/global.service';
+import { AppComponent } from "../app.component";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-transfer-comp',
   standalone: true,
-  imports: [AmountCompComponent, ConfirmationCompComponent, PaymentCompComponent, NgClass, NgIf, CommonModule],
+  imports: [AmountCompComponent, ConfirmationCompComponent, PaymentCompComponent, NgClass, NgIf, CommonModule, AppComponent, RouterOutlet],
   templateUrl: './transfer-comp.component.html',
   styleUrl: './transfer-comp.component.scss'
 })
-export class TransferCompComponent implements OnInit, OnDestroy {
-  status!: string;
-  private sharedSubscription!: Subscription;
-  constructor(private sharedService: SharedService) {}
-  ngOnInit() {
-    this.sharedSubscription = this.sharedService.currentAttribute.subscribe((attribute) => {
-      this.status = attribute;
-    });
-  }
-  ngOnDestroy(): void {
-    if (this.sharedService) {
-      this.sharedSubscription.unsubscribe();
-    }
-  }
+export class TransferCompComponent  {
+  constructor(public globaService: GlobalService) {}
+  
 }

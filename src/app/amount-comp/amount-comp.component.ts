@@ -1,11 +1,14 @@
 import { NgIf } from '@angular/common';
-import { Component, } from '@angular/core';
-import { SharedService } from '../../shared/services/shared.service';
+import { Component, HostListener, } from '@angular/core';
+import { GlobalService } from '../../shared/services/global.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-amount-comp',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, ReactiveFormsModule],
   templateUrl: './amount-comp.component.html',
   styleUrl: './amount-comp.component.scss'
 })
@@ -16,7 +19,14 @@ export class AmountCompComponent {
   currentTo: string = 'EGP';
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
-  constructor(private sharedService: SharedService) {}
+  isModalHidden: boolean = true;
+  transferFrom: FormGroup = new FormGroup({
+    send: new FormControl('', [Validators.required]),
+    get: new FormControl('', [Validators.required]),
+    recipientName: new FormControl('', [Validators.required]),
+    recipientAccount: new FormControl('', [Validators.required, Validators.email]),
+  })
+  constructor(private globalService: GlobalService, private router: Router) {}
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
   }
@@ -31,12 +41,37 @@ export class AmountCompComponent {
     this.currentTo = current;
     this.isToListHidden = true;
   }
-  handleFavourite(event: Event): void {
-    event.preventDefault();
-    console.log("Favourite button clicked");
+  // handleContinue() {
+  //   this.globalService.setGlobalVariable("confirmation");
+  //   this.router.navigate(["/transfer", "confirmation"])
+  //   console.log("Continue button clicked");
+  // }
+  handleCloseModal(): void { 
+    this.isModalHidden = true
+     
+   }
+   handleItemListFavurite(name: string, account: string): void {
+    this.transferFrom.get("recipientName")?.patchValue(name);
+    this.transferFrom.get("recipientAccount")?.patchValue(account);
+    this.isModalHidden = true;
+   }
+  onSubmit(): void {
+    this.globalService.setGlobalVariable("confirmation");
+    this.router.navigate(["/transfer", "confirmation"])
+    console.log("Submit button clicked");
+   }
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.from-current-list')) {
+      this.isFormListHidden = true;
+    }
+    if (!target.closest('.to-current-list')) {
+      this.isToListHidden = true;
+    }
+    if ( (!target.closest('.favorite-modal') && this.isModalHidden === false)|| target.closest(".favorite-button")) {
+      this.isModalHidden = !this.isModalHidden;
+    }
   }
-  handleContinue() {
-    this.sharedService.changeAttribute('confirmation');
-    console.log("Continue button clicked");
-  }
+
 }
