@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AmountCompComponent } from "../amount-comp/amount-comp.component";
 import { ConfirmationCompComponent } from "../confirmation-comp/confirmation-comp.component";
 import { PaymentCompComponent } from "../payment-comp/payment-comp.component";
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { GlobalService } from '../../shared/services/global.service';
 import { AppComponent } from "../app.component";
 import { RouterOutlet } from '@angular/router';
@@ -16,8 +15,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './transfer-comp.component.scss'
 })
 export class TransferCompComponent  {
-  status: string;
-  constructor(private globaService: GlobalService) {
-    this.status = globaService.getGlobalVariable();
-  }
+  constructor(public globaService: GlobalService) {}
+  
 }

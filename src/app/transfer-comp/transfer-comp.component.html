@@ -1,32 +1,23 @@
-
-<header class="h-[404px] bg-center bg-cover bg-no-repeat p-24 relative"
-  style="background-image: url(assets/Breadcrumb-img.png);">
-  <div class="absolute top-0 bottom-0 left-0 right-0 bg-[rgba(242,232,234,0.8)] z-0"></div>
+<header class="h-[404px] bg-center bg-cover bg-no-repeat p-24 relative" style="background-image: url('assets/Breadcrumb-img.png');">
+  <div class="absolute inset-0 bg-[rgba(242,232,234,0.8)] z-0"></div>
   <div class="flex justify-between items-center relative z-10">
     <div>
-        <h2 class="text-5xl font-semibold leading-[150%]">Money Transfer</h2>
-        <p>Home &bull; About Us <span class="text-[#871E35]">&bull; {{status | titlecase}} </span> </p>
-      </div>
-      <img src="assets/Other/Breadcrumb-vector.svg" alt="Trading">
+      <h2 class="text-5xl font-semibold leading-[150%]">Money Transfer</h2>
+      <p>Home &bull; About Us <span class="text-[#871E35]">&bull; {{globaService.getGlobalVariable() | titlecase}}</span></p>
+    </div>
+    <img src="assets/Other/Breadcrumb-vector.svg" alt="Illustration of trading steps">
   </div>
-  
 </header>
 
 <main class="p-20">
-  <div class="w-[38%] ml-auto mr-auto flex flex-col items-center gap-16">
+  <div class="w-[38%] mx-auto flex flex-col items-center gap-16">
     <div class="flex flex-col gap-9 w-80">
       <div class="flex gap-2 items-center justify-center">
-        <div
-          class="border-[3px] border-[#871E35] text-xl font-medium text-[#871E35] w-12 h-12 rounded-full flex justify-center items-center">
-          01</div>
+        <div class="border-[3px] border-[#871E35] text-xl font-medium text-[#871E35] w-12 h-12 rounded-full flex justify-center items-center">01</div>
         <hr class="w-14 border-t-2 border-[#871E35]">
-        <div
-          class="border-[3px] text-xl font-medium w-12 h-12 rounded-full flex justify-center items-center" [ngClass]="{'border-[#A3AAB2] text-[#A3AAB2]': status !== 'confirmation' &&  status !== 'payment', 'border-[#871E35] text-[#871E35]': status === 'confirmation' ||  status === 'payment'}">
-          02</div>
-        <hr class="w-14 border-t-2" [ngClass]="{'border-[#A3AAB2]': status !== 'confirmation' &&  status !== 'payment', 'border-[#871E35]': status === 'confirmation' ||  status === 'payment'}">
-        <div
-          class="border-[3px]  text-xl font-medium  w-12 h-12 rounded-full flex justify-center items-center" [ngClass]="{'border-[#A3AAB2] text-[#A3AAB2]': status !== 'payment', 'border-[#871E35] text-[#871E35]': status === 'payment'}">
-          03</div>
+        <div class="border-[3px] text-xl font-medium w-12 h-12 rounded-full flex justify-center items-center" [ngClass]="{'border-[#A3AAB2] text-[#A3AAB2]': globaService.getGlobalVariable() !== 'confirmation' && globaService.getGlobalVariable() !== 'payment', 'border-[#871E35] text-[#871E35]': globaService.getGlobalVariable() === 'confirmation' || globaService.getGlobalVariable() === 'payment'}">02</div>
+        <hr class="w-14 border-t-2" [ngClass]="{'border-[#A3AAB2]': globaService.getGlobalVariable() !== 'confirmation' && globaService.getGlobalVariable() !== 'payment', 'border-[#871E35]': globaService.getGlobalVariable() === 'confirmation' || globaService.getGlobalVariable() === 'payment'}">
+        <div class="border-[3px] text-xl font-medium w-12 h-12 rounded-full flex justify-center items-center" [ngClass]="{'border-[#A3AAB2] text-[#A3AAB2]': globaService.getGlobalVariable() !== 'payment', 'border-[#871E35] text-[#871E35]': globaService.getGlobalVariable() === 'payment'}">03</div>
       </div>
       <div class="flex justify-between items-center">
         <p>Amount</p>
@@ -35,8 +26,7 @@
       </div>
     </div>
     <div class="w-full">
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
-    
   </div>
 </main>

@@ -12,6 +12,7 @@ import { GlobalService } from '../../shared/services/global.service';
 export class ConfirmationCompComponent {
   constructor(private globalService: GlobalService,private router: Router) { }
   handleConfirm() : void {
+    this.globalService.setGlobalVariable("payment")
     this.router.navigate(["/transfer", "payment"])
   }
   handleBack() : void {
