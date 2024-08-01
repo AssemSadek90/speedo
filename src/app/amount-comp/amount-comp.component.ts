@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, } from '@angular/core';
-import { SharedService } from '../../shared/services/shared.service';
+import { GlobalService } from '../../shared/services/global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-amount-comp',
@@ -16,7 +17,7 @@ export class AmountCompComponent {
   currentTo: string = 'EGP';
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
-  constructor(private sharedService: SharedService) {}
+  constructor(private globalService: GlobalService, private router: Router) {}
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
   }
@@ -36,7 +37,8 @@ export class AmountCompComponent {
     console.log("Favourite button clicked");
   }
   handleContinue() {
-    this.sharedService.changeAttribute('confirmation');
+    this.globalService.setGlobalVariable("confirmation");
+    this.router.navigate(["/transfer", "confirmation"])
     console.log("Continue button clicked");
   }
 }

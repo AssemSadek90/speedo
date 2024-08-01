@@ -34,8 +34,9 @@
         <p>Payment</p>
       </div>
     </div>
-    <app-amount-comp *ngIf="status === 'amount'" class="w-full"  ></app-amount-comp>
-    <app-confirmation-comp *ngIf="status === 'confirmation'" class="w-full" ></app-confirmation-comp>
-    <app-payment-comp *ngIf="status === 'payment'" class="w-full" ></app-payment-comp>
+    <div class="w-full">
+        <router-outlet></router-outlet>
+    </div>
+    
   </div>
 </main>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SharedService } from '../../shared/services/shared.service';
+import { Router } from '@angular/router';
+import { GlobalService } from '../../shared/services/global.service';
 
 @Component({
   selector: 'app-confirmation-comp',
@@ -9,11 +10,12 @@ import { SharedService } from '../../shared/services/shared.service';
   styleUrl: './confirmation-comp.component.scss'
 })
 export class ConfirmationCompComponent {
-  constructor(private sharedService: SharedService) {}
+  constructor(private globalService: GlobalService,private router: Router) { }
   handleConfirm() : void {
-    this.sharedService.changeAttribute("payment");
+    this.router.navigate(["/transfer", "payment"])
   }
   handleBack() : void {
-    this.sharedService.changeAttribute("amount");
+    this.globalService.setGlobalVariable("amount")
+    this.router.navigate(["/transfer", "amount"])
   }
 }
