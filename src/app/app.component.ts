@@ -6,11 +6,13 @@ import { FooterCompComponent } from './footer-comp/footer-comp.component';
 import { TransferCompComponent } from "./transfer-comp/transfer-comp.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { BannerCompComponent } from './banner-comp/banner-comp.component';
+import { GettingStartedCompComponent } from './getting-started-comp/getting-started-comp.component';
+import { HomeCompComponent } from './home-comp/home-comp.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarCompComponent, MobileAppCompComponent, FooterCompComponent, TransferCompComponent,ReactiveFormsModule, BannerCompComponent],
+  imports: [RouterOutlet, NavbarCompComponent, MobileAppCompComponent, FooterCompComponent, TransferCompComponent,ReactiveFormsModule, BannerCompComponent, GettingStartedCompComponent, HomeCompComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

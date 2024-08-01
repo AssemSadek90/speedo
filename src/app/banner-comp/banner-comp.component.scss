@@ -11,3 +11,9 @@ section{
 .container{
     color: $secondary-color;
 }
+button{
+    background-color: $primary-color;
+}
+button:hover{
+    background-color: darken($primary-color,10%);
+}

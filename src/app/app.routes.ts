@@ -5,9 +5,10 @@ import { ConfirmationCompComponent } from './confirmation-comp/confirmation-comp
 import { ConfirmationGaurdService } from '../shared/services/gaurds/confirmation/confirmation-gaurd.service';
 import { PaymentCompComponent } from './payment-comp/payment-comp.component';
 import { PaymentGaurdService } from '../shared/services/gaurds/payment/payment-gaurd.service';
+import { HomeCompComponent } from './home-comp/home-comp.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', component: HomeCompComponent},
   {
     path: 'transfer',
     component: TransferCompComponent,
