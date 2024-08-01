@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, } from '@angular/core';
-import { SharedService } from '../../shared/shared.service';
+import { SharedService } from '../../shared/services/shared.service';
 
 @Component({
   selector: 'app-amount-comp',
@@ -11,8 +11,8 @@ import { SharedService } from '../../shared/shared.service';
 })
 export class AmountCompComponent {
   currentFrom: string = 'USD';
-  urlImgFrom: string = "../../assets/united-states.png";
-  urlImgTo: string = "../../assets/egypt.png";
+  urlImgFrom: string = "assets/flags/united states.svg";
+  urlImgTo: string = "assets/flags/egypt.svg";
   currentTo: string = 'EGP';
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;

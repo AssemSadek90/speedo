@@ -2,14 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AmountCompComponent } from "../amount-comp/amount-comp.component";
 import { ConfirmationCompComponent } from "../confirmation-comp/confirmation-comp.component";
 import { PaymentCompComponent } from "../payment-comp/payment-comp.component";
-import { NgClass, NgIf } from '@angular/common';
-import { SharedService } from '../../shared/shared.service';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
+import { SharedService } from '../../shared/services/shared.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transfer-comp',
   standalone: true,
-  imports: [AmountCompComponent, ConfirmationCompComponent, PaymentCompComponent, NgClass, NgIf],
+  imports: [AmountCompComponent, ConfirmationCompComponent, PaymentCompComponent, NgClass, NgIf, CommonModule],
   templateUrl: './transfer-comp.component.html',
   styleUrl: './transfer-comp.component.scss'
 })
