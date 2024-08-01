@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarCompComponent } from './navbar-comp/navbar-comp.component';
 import { MobileAppCompComponent } from './mobile-app-comp/mobile-app-comp.component';
 import { FooterCompComponent } from './footer-comp/footer-comp.component';
+import { TransferCompComponent } from "./transfer-comp/transfer-comp.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarCompComponent, MobileAppCompComponent, FooterCompComponent],
+  imports: [RouterOutlet, NavbarCompComponent, MobileAppCompComponent, FooterCompComponent, TransferCompComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

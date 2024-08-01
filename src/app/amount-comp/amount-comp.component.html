@@ -1,0 +1,124 @@
+<div class="flex flex-col justify-center items-center gap-12">
+    <div class="flex flex-col justify-center items-center gap-4">
+      <h3 class="font-semibold text-4xl leading-[150%]">
+        How much are you sending?
+      </h3>
+      <p class="text-[16px] text-[#565552] font-normal">Rate guaranteed (2h)</p>
+      <p class="text-2xl font-semibold">1 USD = 48.4220 EGP</p>
+    </div>
+    <div class="w-full flex flex-col gap-4">
+      <label for="send">You send</label>
+      <div class="relative">
+        <input
+          type="text"
+          id="send"
+          class="py-4 ps-10 pe-36 outline-none border-[#B0AFAE] border-[1px] rounded-lg w-full"
+        />
+        <div
+          class="bg-[#E3E2E2] absolute w-36 right-0 top-0 bottom-0 flex justify-center items-center gap-2 rounded-tr-lg rounded-br-lg cursor-pointer"
+          (click)="handleClickFrom()"
+        >
+          <img
+            class="w-4 h-4 rounded-full"
+            src="{{ urlImgFrom }}"
+            alt=""
+          /><span>{{ currentFrom }}</span
+          ><i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div
+          class="absolute w-36 z-10 rounded-lg bg-white p-2 flex flex-col justify-center items-center right-0 top-[80%] gap-3"
+          *ngIf="!isFormListHidden"
+        >
+          <div
+            class="flex justify-center items-center gap-2 cursor-pointer p-3 hover:bg-[#E3E2E2] w-full"
+            (click)="handleSelectFrom('EUR')"
+          >
+            <span>EUR</span
+            ><img
+              w-full
+              class="w-4 h-4 rounded-full"
+              src="../../assets/united-states.png"
+              alt=""
+            />
+          </div>
+          <div
+            class="flex justify-center items-center gap-2 cursor-pointer p-3 hover:bg-[#E3E2E2] w-full"
+            (click)="handleSelectFrom('KSR')"
+          >
+            <span>KSR</span
+            ><img
+              class="w-4 h-4 rounded-full"
+              src="../../assets/united-states.png"
+              alt=""
+            />
+          </div>
+          <div
+            class="flex justify-center items-center gap-2 cursor-pointer p-3 hover:bg-[#E3E2E2] w-full"
+            (click)="handleSelectFrom('EGP')"
+          >
+            <span>EGP</span
+            ><img
+              class="w-4 h-4 rounded-full"
+              src="../../assets/united-states.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <label for="send">You send</label>
+      <div class="relative">
+        <input
+          type="text"
+          id="send"
+          class="py-4 ps-10 pe-36 outline-none border-[#B0AFAE] border-[1px] rounded-lg w-full"
+        />
+        <div
+          class="bg-[#E3E2E2] absolute w-36 right-0 top-0 bottom-0 flex justify-center items-center gap-2 rounded-tr-lg rounded-br-lg cursor-pointer"
+          (click)="handleClickTo()"
+        >
+          <img class="w-4 h-4 rounded-full" src="{{ urlImgTo }}" alt="" /><span>{{
+            currentTo
+          }}</span
+          ><i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div
+          class="absolute w-36 z-10 rounded-lg bg-white p-2 flex flex-col justify-center items-center right-0 top-[80%] gap-3"
+          *ngIf="!isToListHidden"
+        >
+          <div
+            class="flex justify-center items-center gap-2 cursor-pointer p-3 hover:bg-[#E3E2E2] w-full"
+            (click)="handleSelectTo('EUR')"
+          >
+            <span>EUR</span
+            ><img
+              w-full
+              class="w-4 h-4 rounded-full"
+              src="{{ urlImgTo }}"
+              alt=""
+            />
+          </div>
+          <div
+            class="flex justify-center items-center gap-2 cursor-pointer p-3 hover:bg-[#E3E2E2] w-full"
+            (click)="handleSelectTo('KSR')"
+          >
+            <span>KSR</span
+            ><img class="w-4 h-4 rounded-full" src="{{ urlImgTo }}" alt="" />
+          </div>
+          <div
+            class="flex justify-center items-center gap-2 cursor-pointer p-3 hover:bg-[#E3E2E2] w-full"
+            (click)="handleSelectTo('EGP')"
+          >
+            <span>EGP</span
+            ><img class="w-4 h-4 rounded-full" src="{{ urlImgTo }}" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between items-center"><p>Recipient Information</p> <a href="#" (click)="handleFavourite($event)" class="text-[#871E35]"><i class="fa-regular fa-star"></i> Favourite <i class="fa-solid fa-angle-right"></i></a></div>
+      <label for="recipient-name">Recipient Name</label>
+      <input type="text" id="recipient-name" class="py-4 px-10 outline-none border-[#B0AFAE] border-[1px] rounded-lg w-full">
+      <label for="recipient-account">Recipient Account</label>
+      <input type="text" id="recipient-account" class="py-4 px-10 outline-none border-[#B0AFAE] border-[1px] rounded-lg w-full">
+      <button class="text-white py-4 px-8 bg-[#871E35] rounded-md" (click)="handleContinue()">Continue</button>
+  </div>
+  </div>
+  
