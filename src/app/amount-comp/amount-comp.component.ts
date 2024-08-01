@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, } from '@angular/core';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-amount-comp',
@@ -15,7 +16,7 @@ export class AmountCompComponent {
   currentTo: string = 'EGP';
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
-  @Output() changeStatusToConfirmation = new EventEmitter<void>();
+  constructor(private sharedService: SharedService) {}
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
   }
@@ -35,7 +36,7 @@ export class AmountCompComponent {
     console.log("Favourite button clicked");
   }
   handleContinue() {
-    this.changeStatusToConfirmation.emit();
+    this.sharedService.changeAttribute('confirmation');
     console.log("Continue button clicked");
   }
 }
