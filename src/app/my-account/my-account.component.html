@@ -1,39 +1,60 @@
 <section>
-    <header class="h-[404px] bg-center bg-cover bg-no-repeat p-24 relative" style="background-image: url('/assets/Breadcrumb img.png');">
-      <div class="absolute inset-0 bg-[rgba(242,232,234,0.8)] z-0"></div>
-      <div class="flex justify-between items-center relative z-10">
-        <div>
-          <h2 class="text-5xl font-semibold leading-[150%]">My Account</h2>
-          <p>Home <span class="text-[#871E35]">&bull; My account</span></p>
-        </div>
-        <img src="/assets/Other/Breadcrumb vector.svg" alt="Illustration of trading steps">
+  <header
+    class="h-[404px] bg-center bg-cover bg-no-repeat p-24 relative"
+    style="background-image: url('/assets/Breadcrumb img.png')"
+  >
+    <div class="absolute inset-0 bg-[rgba(242,232,234,0.8)] z-0"></div>
+    <div class="flex justify-between items-center relative z-10">
+      <div>
+        <h2 class="text-5xl font-semibold leading-[150%]">My Account</h2>
+        <p>Home <span class="text-[#871E35]">&bull; My account</span></p>
       </div>
-    </header>
-    <div>
-      <div class="flex flex-col items-center justify-center min-h-screen p-20">
-        <div class="flex flex-row justify-around items-start w-full max-w-6xl">
-          <!-- Sidebar -->
-          <aside class="w-64 h-screen p-0">
-            <ul>
-              <li class="mb-0 py-2 bg-primary-color">
-                <a routerLink="/myprofile" class="block py-4 px-4 text-white font-medium">My Profile</a>
-              </li>
-              <li class="mb-0">
-                <a routerLink="/paymenthistory" class="block py-4 px-4 text-color-ter hover:outline hover:outline-2 hover:outline-red-500">Payment History</a>
-              </li>
-              <li class="mb-0 py-2">
-                <a routerLink="/settings" class="block py-4 px-4 text-color-ter hover:outline hover:outline-2 hover:outline-red-500">Settings</a>
-              </li>
-              <li class="mb-0 py-2">
-                <a routerLink="/changepassword" class="block py-4 px-4 text-color-ter hover:outline hover:outline-2 hover:outline-red-500">Change Password</a>
-              </li>
-            </ul>
-          </aside>
-          <main class="flex-1 p-0">
-            <router-outlet></router-outlet>
-          </main>
-        </div>
+      <img
+        src="/assets/Other/Breadcrumb vector.svg"
+        alt="Illustration of trading steps"
+      />
+    </div>
+  </header>
+  <div>
+    <div class="flex flex-col items-center justify-center min-h-screen p-20">
+      <div class="flex flex-row justify-around items-start w-full max-w-6xl">
+        <!-- Sidebar -->
+        <aside class="w-64 h-screen p-0">
+          <ul>
+            <li class="mb-0 py-2 bg-primary-color">
+              <a
+                routerLink="/myaccount/myprofile"
+                class="block py-4 px-4 text-white font-medium"
+                >My Profile</a
+              >
+            </li>
+            <li class="mb-0">
+              <a
+                routerLink="/myaccount/paymenthistory"
+                class="block py-4 px-4 text-color-ter hover:outline hover:outline-2 hover:outline-red-500"
+                >Payment History</a
+              >
+            </li>
+            <li class="mb-0 py-2">
+              <a
+                routerLink="/myaccount/settings"
+                class="block py-4 px-4 text-color-ter hover:outline hover:outline-2 hover:outline-red-500"
+                >Settings</a
+              >
+            </li>
+            <li class="mb-0 py-2">
+              <a
+                routerLink="/myaccount/changepassword"
+                class="block py-4 px-4 text-color-ter hover:outline hover:outline-2 hover:outline-red-500"
+                >Change Password</a
+              >
+            </li>
+          </ul>
+        </aside>
+        <main class="flex-1 p-0">
+          <router-outlet></router-outlet>
+        </main>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>
