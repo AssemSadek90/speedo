@@ -1,18 +1,26 @@
 import { NgIf } from '@angular/common';
-import { Component, HostListener, } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, } from '@angular/core';
 import { GlobalService } from '../../shared/services/global.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { CurrencyService } from '../currency-service.service';
+import { Subscription } from 'rxjs';
 
-
+export function greaterThanZeroValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    return value > 0 ? null : { greaterThanZero: true };
+  };
+}
 @Component({
   selector: 'app-amount-comp',
   standalone: true,
   imports: [NgIf, ReactiveFormsModule],
   templateUrl: './amount-comp.component.html',
-  styleUrl: './amount-comp.component.scss'
+  styleUrl: './amount-comp.component.scss',
+
 })
-export class AmountCompComponent {
+export class AmountCompComponent implements OnDestroy, OnInit{
   currentFrom: string = 'USD';
   urlImgFrom: string = "assets/flags/united states.svg";
   urlImgTo: string = "assets/flags/egypt.svg";
@@ -20,19 +28,69 @@ export class AmountCompComponent {
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
   isModalHidden: boolean = true;
+  exchangeRate!: number;
+  USDEqualToEGP!: number;
+  currencySubscribtion1!: Subscription;
+  currencySubscribtion2!: Subscription;
+  currencySubscribtion3!: Subscription;
+
+
   transferFrom: FormGroup = new FormGroup({
-    send: new FormControl('', [Validators.required]),
-    get: new FormControl('', [Validators.required]),
+    send: new FormControl(0, [ greaterThanZeroValidator()]),
+    get: new FormControl(0, [ greaterThanZeroValidator()]),
     recipientName: new FormControl('', [Validators.required]),
     recipientAccount: new FormControl('', [Validators.required, Validators.email]),
   })
-  constructor(private globalService: GlobalService, private router: Router) {}
+  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService) {
+    
+  }
+  ngOnInit(): void {
+    this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
+      next: (data) => {
+        const rate = data.conversion_rates[this.currentTo];
+        if (rate) {
+          this.exchangeRate = rate;
+          this.USDEqualToEGP = rate;
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching exchange rate:', err);
+      }
+    });
+    this.transferFrom.get("send")?.valueChanges.subscribe(data => {
+      if (!isNaN(Number(data))) {
+        this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
+      }
+      
+    })
+    this.transferFrom.get("get")?.valueChanges.subscribe(data => {
+      if (!isNaN(Number(data))) {
+        this.transferFrom.get("send")?.setValue(data / this.exchangeRate, {emitEvent: false});
+      }
+      
+    })
+  }
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
   }
   handleSelectFrom(current: string): void {
     this.currentFrom = current;
     this.isFormListHidden = true;
+    this.currencySubscribtion2 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
+      next: (data) => {
+        const rate = data.conversion_rates[this.currentTo];
+        if (rate) {
+          this.exchangeRate = rate;
+        }
+        console.log(this.exchangeRate);
+      },
+      error: (err) => {
+        console.error('Error fetching exchange rate:', err);
+      }
+    });
+    this.transferFrom.get("get")?.patchValue(0);
+    this.transferFrom.get("send")?.patchValue(0);
+
   }
   handleClickTo(): void {
     this.isToListHidden =!this.isToListHidden;
@@ -40,9 +98,23 @@ export class AmountCompComponent {
   handleSelectTo(current: string): void {
     this.currentTo = current;
     this.isToListHidden = true;
+    this.currencySubscribtion3 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
+      next: (data) => {
+        const rate = data.conversion_rates[this.currentTo];
+        if (rate) {
+          this.exchangeRate = rate;
+        }
+        console.log(this.exchangeRate);
+      },
+      error: (err) => {
+        console.error('Error fetching exchange rate:', err);
+      }
+    });
+    this.transferFrom.get("get")?.patchValue(0);
+    this.transferFrom.get("send")?.patchValue(0);
   }
   // handleContinue() {
-  //   this.globalService.setGlobalVariable("confirmation");
+  //   this.globalService.setTransferStatusVariable("confirmation");
   //   this.router.navigate(["/transfer", "confirmation"])
   //   console.log("Continue button clicked");
   // }
@@ -55,11 +127,23 @@ export class AmountCompComponent {
     this.transferFrom.get("recipientAccount")?.patchValue(account);
     this.isModalHidden = true;
    }
-  onSubmit(): void {
-    this.globalService.setGlobalVariable("confirmation");
-    this.router.navigate(["/transfer", "confirmation"])
+  onSubmit(form: FormGroup): void {
+    if (form.invalid) return;
+    this.globalService.setTransferStatusVariable("confirmation");
+    this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value) } });
     console.log("Submit button clicked");
    }
+  ngOnDestroy(): void {
+      if (this.currencySubscribtion1) {
+        this.currencySubscribtion1.unsubscribe();
+      }
+      if (this.currencySubscribtion2) {
+        this.currencySubscribtion1.unsubscribe();
+      }
+      if (this.currencySubscribtion3) {
+        this.currencySubscribtion1.unsubscribe();
+      }
+  }
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -73,5 +157,6 @@ export class AmountCompComponent {
       this.isModalHidden = !this.isModalHidden;
     }
   }
+
 
 }
