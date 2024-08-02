@@ -16,4 +16,10 @@ aside{
 }
 li{
     border: 1px  #3C3A37;
+    color: $tertiary-color; ;
+}
+li:hover{
+    background-color: $primary-color;
+    color: white;
+    
 }
