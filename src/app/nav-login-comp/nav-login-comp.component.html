@@ -1,8 +1,107 @@
+<div
+  *ngIf="!isLoginModalHidden"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleOpenLoginModal()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+
+    <div class="flex flex-col mx-auto w-[40%] p-8 space-y-4">
+      <span class="text-4xl">Login here</span>
+      <span class="text-[#565552]">welcome back. Login to your account</span>
+      <label for="email">Your email address</label>
+      <input
+        class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+        id="email"
+        type="text"
+        placeholder="Email"
+      />
+      <label for="password">Password</label>
+      <input
+        class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+        type="password"
+        id="password"
+        placeholder="Password"
+      />
+      <button class="prim-button text-white rounded-[6.5px] py-4 px-8">
+        Login
+      </button>
+      <span>Don't have an account? <a href="/">Create Account</a></span>
+    </div>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="!isRegisterModalHidden"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleOpenRegisterModal()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="grid grid-cols-2">
+      <div class=""></div>
+      <div></div>
+    </div>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
+</div>
+
 <div class="flex space-x-4">
-  <button class="second-button border border-black rounded-[6.5px] py-4 px-8">
+  <button
+    (click)="handleOpenLoginModal()"
+    class="second-button border border-black rounded-[6.5px] py-4 px-8"
+  >
     Login
   </button>
-  <button class="prim-button text-white rounded-[6.5px] py-4 px-8">
+  <button
+    (click)="handleOpenRegisterModal()"
+    class="prim-button text-white rounded-[6.5px] py-4 px-8"
+  >
     Register Now
   </button>
 </div>

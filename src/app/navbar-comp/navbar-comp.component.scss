@@ -1,4 +1,4 @@
-
+@import "../../shared/globalVariables";
 .title{
     font-size: 32px;
     font-family: 'Inter', sans-serif;
@@ -6,4 +6,7 @@
 button{
     cursor: pointer;
     font-size: 16px;
+}
+.active{
+    color: $primary-color;
 }

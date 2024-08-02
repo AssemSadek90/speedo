@@ -13,3 +13,7 @@
 .second-button:hover{
     background-color: darken(white, 20%);
 }
+
+input:focus{
+    outline:2px solid #B0AFAE;
+}
