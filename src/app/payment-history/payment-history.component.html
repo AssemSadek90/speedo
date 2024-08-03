@@ -1,6 +1,6 @@
 <section class="container mx-auto px-8 py-1">
     <h4 class="text-2xl">Payment History</h4>
-    <br>
+    <br><br>
     <div  *ngFor="let item of items; let i = index">
       <div class="accNUM flex justify-between ">
         <div class="flex">
@@ -22,9 +22,10 @@
             <div class="flex">
           <label class="font-bold mb-2">Total Price:</label><p class="font-bold mb-2">1000<span>USD</span></p>
         </div>
-          <p class="text-gray-600 mb-2 pl-10">Jonathon Smith</p>
+          <p class="text-gray-600 mb-2 pl-10">{{item.RecipientName}}</p>
         </div>
       </div>
     </div>
+    
   </section>
   
