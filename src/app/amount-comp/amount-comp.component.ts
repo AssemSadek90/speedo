@@ -31,8 +31,8 @@ export function twelveDigitValidator(): ValidatorFn {
 })
 export class AmountCompComponent implements OnDestroy, OnInit{
   currentFrom: string = 'USD';
-  urlImgFrom: string = "assets/flags/united states.svg";
-  urlImgTo: string = "assets/flags/egypt.svg";
+  urlImgFrom: string = "assets/flags/united-states.png";
+  urlImgTo: string = "assets/flags/egypt.png";
   currentTo: string = 'EGP';
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
@@ -57,19 +57,19 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     
   }
   ngOnInit(): void {
-    this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
-      next: (data) => {
-        const rate = data.conversion_rates[this.currentTo];
-        if (rate) {
-          console.log("i'm in")
-          this.exchangeRate = rate;
-          this.USDEqualToEGP = rate;
-        }
-      },
-      error: (err) => {
-        console.error('Error fetching exchange rate:', err);
-      }
-    });
+    // this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
+    //   next: (data) => {
+    //     const rate = data.conversion_rates[this.currentTo];
+    //     if (rate) {
+    //       console.log("i'm in")
+    //       this.exchangeRate = rate;
+    //       this.USDEqualToEGP = rate;
+    //     }
+    //   },
+    //   error: (err) => {
+    //     console.error('Error fetching exchange rate:', err);
+    //   }
+    // });
     this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
@@ -86,8 +86,9 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
   }
-  handleSelectFrom(current: string): void {
+  handleSelectFrom(current: string, imgFlag: string): void {
     this.currentFrom = current;
+    this.urlImgFrom = imgFlag;
     this.isFormListHidden = true;
     this.currencySubscribtion2 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
       next: (data) => {
@@ -108,8 +109,9 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   handleClickTo(): void {
     this.isToListHidden =!this.isToListHidden;
   }
-  handleSelectTo(current: string): void {
+  handleSelectTo(current: string, imgFlag: string): void {
     this.currentTo = current;
+    this.urlImgTo = imgFlag;
     this.isToListHidden = true;
     this.currencySubscribtion3 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
       next: (data) => {
@@ -141,10 +143,10 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     this.isModalHidden = true;
    }
   onSubmit(form: FormGroup): void {
-    if (form.invalid) {
-      this.isSubmitted = true;
-      return;
-    };
+    // if (form.invalid) {
+    //   this.isSubmitted = true;
+    //   return;
+    // };
     this.isSubmitted = false;
     this.globalService.setTransferStatusVariable("confirmation");
     this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value) } });

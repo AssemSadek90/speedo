@@ -9,6 +9,7 @@ module.exports = {
       screens: {
         "w-1465-max": {"max": "1465px"},
         'w-1190-max': {'max': '1190px'},
+        "w-910-max": {"max": "910px"},
         'w-820-max': {'max': '820px'},
         'w-780-max': {'max': '780px'},
         'w-625-max': {'max': '625px'},
