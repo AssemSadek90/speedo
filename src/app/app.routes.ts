@@ -12,6 +12,7 @@ import { ConfirmationGaurdService } from '../shared/services/gaurds/confirmation
 import { PaymentCompComponent } from './payment-comp/payment-comp.component';
 import { PaymentGaurdService } from '../shared/services/gaurds/payment/payment-gaurd.service';
 import { HomeCompComponent } from './home-comp/home-comp.component';
+import { Error404Component } from './error404/error404.component';
 
 
 export const routes: Routes = [
@@ -56,4 +57,5 @@ export const routes: Routes = [
       {path: '**', redirectTo: 'myprofile'}
     ]
   },
+  { path: 'error404', component: Error404Component },
 ];
