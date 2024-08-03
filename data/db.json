@@ -1,0 +1,35 @@
+{
+  "login": [
+    {
+      "id": "9896",
+      "username": "admin@radiology.com",
+      "password": "123"
+    },
+    {
+      "id": "f7e1",
+      "username": "abdelhamid.ssen@gmail.com",
+      "password": "ooo"
+    },
+    {
+      "id": "a501",
+      "username": "abdelhamid.ssen@gmail.com",
+      "password": "123",
+      "token": "888"
+    }
+  ],
+  "register": [],
+  "user": [
+    {
+      "id": "9896",
+      "username": "mahmoud"
+    },
+    {
+      "id": "2",
+      "username": "mahmoud"
+    },
+    {
+      "id": "3",
+      "username": "mahmoud"
+    }
+  ]
+}

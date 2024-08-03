@@ -1,11 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { eachYearOfInterval, eachDayOfInterval, endOfYear, startOfYear, getDaysInMonth } from 'date-fns';
+import { LoginService } from '../../shared/services/login.service';
 @Component({
   selector: 'nav-login-comp',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgClass],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule, NgClass],
   templateUrl: './nav-login-comp.component.html',
   styleUrl: './nav-login-comp.component.scss'
 })
@@ -28,7 +30,13 @@ export class NavLoginCompComponent {
   years: number[] = [];
   selectedYear: number = new Date().getFullYear();
   selectedMonth: number = 1;
-  constructor() {
+
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  });
+
+  constructor(private loginService: LoginService) {
     this.years = eachYearOfInterval({ start: new Date().setFullYear(this.selectedYear - 100), end: new Date() }).map(date => date.getFullYear());
     this.updateDays();
   }
@@ -48,6 +56,21 @@ export class NavLoginCompComponent {
     this.updateDays();
   }
 
+  tokenAvailable: boolean = this.loginService.id !== undefined;
+
+  async onSubmit() {
+    if (this.loginForm.invalid) return;
+
+    try {
+      const { email, password } = this.loginForm.value;
+      await this.loginService.loginRequest(email!, password!);
+      this.tokenAvailable = this.loginService.id !== undefined;
+      this.isLoginModalHidden = true;
+    } catch (error) {
+      console.error('Login failed', error);
+      this.tokenAvailable = false;
+    }
+  }
 
   isLoginModalHidden: boolean = true;
   isRegisterModalHidden: boolean = true;
