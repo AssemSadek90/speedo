@@ -9,7 +9,7 @@ export class PaymentGaurdService {
 
   constructor(private globalService: GlobalService, private router: Router) { }
   canActivate(): boolean {
-    if (this.globalService.getGlobalVariable() === "payment") {
+    if (this.globalService.getTransferStatusVariable() === "payment") {
       return true;
     } else {
       this.router.navigate(["/transfer", "amount"])

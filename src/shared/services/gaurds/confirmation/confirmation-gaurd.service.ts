@@ -9,7 +9,7 @@ export class ConfirmationGaurdService {
 
   constructor(private globalService: GlobalService, private router: Router) { }
   canActivate(): boolean {
-    if (this.globalService.getGlobalVariable() === "confirmation") {
+    if (this.globalService.getTransferStatusVariable() === "confirmation") {
       return true;
     } else {
       this.router.navigate(["/transfer", "amount"])

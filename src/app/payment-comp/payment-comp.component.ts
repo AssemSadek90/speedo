@@ -12,7 +12,7 @@ import { GlobalService } from '../../shared/services/global.service';
 export class PaymentCompComponent {
   constructor(private router: Router, private globalService: GlobalService) {}
   handleBackToHome() {
-    this.globalService.setGlobalVariable("amount")
+    this.globalService.setTransferStatusVariable("amount")
     this.router.navigate(["/transfer", "amount"]);
   }
 }

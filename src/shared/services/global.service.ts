@@ -10,11 +10,11 @@ export class GlobalService {
     this.transferStatus = 'amount';
   }
 
-  setGlobalVariable(value: string): void {
+  setTransferStatusVariable(value: string): void {
     this.transferStatus = value;
   }
 
-  getGlobalVariable(): string {
+  getTransferStatusVariable(): string {
     return this.transferStatus;
   }
 }
