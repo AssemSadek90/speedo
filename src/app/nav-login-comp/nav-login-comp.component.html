@@ -81,10 +81,102 @@
         />
       </svg>
     </div>
-    <div class="grid grid-cols-2">
-      <div class=""></div>
-      <div></div>
+    <div class="flex flex-col px-[5%] space-y-4">
+      <span class="text-4xl">Create Your Account</span>
+      <span class="text-[#565552]"
+        >Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+        tempor incididunt ut labore.</span
+      >
     </div>
+    <form class="grid grid-cols-2 gap-x-[5%] w-[70%] mx-auto overflow-y-scroll">
+      <div class="flex flex-col space-y-4">
+        <label for="username">User Name</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          id="username"
+          type="text"
+        />
+        <label for="email">Email address</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          id="email"
+          type="email"
+        />
+        <label for="country">Country</label>
+        <select
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          name="country"
+          id="country"
+        >
+          <option value="EG">EG</option>
+          <option value="UK">UK</option>
+          <option value="US">US</option>
+          <option value="DE">DE</option>
+        </select>
+      </div>
+      <div class="flex flex-col space-y-4">
+        <div class="flex space-x-4">
+          <div class="flex flex-col space-y-4">
+            <label for="day">Day of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="day"
+              name="day"
+            >
+              <option value="">DD</option>
+              <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <label for="month">Month of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="month"
+              name="month"
+              [(ngModel)]="selectedMonth"
+              (change)="onMonthChange(selectedMonth)"
+            >
+              <option value="">Month</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </option>
+            </select>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <label for="year">Year of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="year"
+              name="year"
+              [(ngModel)]="selectedYear"
+              (change)="onYearChange(selectedYear)"
+            >
+              <option value="">YYYY</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <label for="password">Password</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          type="password"
+          id="password"
+        />
+        <label for="confirm-password">Confirm Password</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          type="password"
+          id="confirm-password"
+        />
+      </div>
+      <button
+        class="prim-button col-span-2 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
+      >
+        Create An Account
+      </button>
+    </form>
     <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
       <span>©Speedo Transfer Payments Limited 2024</span>
     </div>
