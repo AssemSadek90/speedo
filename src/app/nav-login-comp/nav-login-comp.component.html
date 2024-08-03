@@ -183,17 +183,12 @@
   </div>
 </div>
 
-<div class="flex space-x-4">
-  <button
-    (click)="handleOpenLoginModal()"
-    class="second-button border border-black rounded-[6.5px] py-4 px-8"
-  >
 <div class="flex space-x-4 w-910-max:text-[16px]">
   <div class="flex gap-4 w-780-max:hidden">
-    <button class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
+    <button (click)="handleOpenLoginModal()" class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
     Login
   </button>
-  <button class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
+  <button (click)="handleOpenRegisterModal()" class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
     Register Now
   </button>
   </div>
