@@ -11,13 +11,13 @@ export class LoginService {
   apiEndPoint = environment.login.endpoint;
 
   id?: number;
-  token?: string;
+  token: string = 'helloworld';
 
   constructor(private http: HttpClient) { }
 
   async loginRequest(username: string | undefined, password: string | undefined): Promise<any> {
     try {
-      const response = await firstValueFrom(this.http.post<any>(`${this.apiUrl}${this.apiEndPoint}`, { username, password }));
+      const response = await firstValueFrom(this.http.post<any>(`${this.apiUrl}${this.apiEndPoint}`, { username, password, token: this.token }));
       this.token = response.token;
       this.id = response.id;
       sessionStorage.setItem('token', this.token!);
