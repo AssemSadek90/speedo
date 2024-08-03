@@ -33,6 +33,8 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   currencySubscribtion1!: Subscription;
   currencySubscribtion2!: Subscription;
   currencySubscribtion3!: Subscription;
+  transferSubscription1!: Subscription | undefined;
+  transferSubscription2!: Subscription | undefined;
 
 
   transferFrom: FormGroup = new FormGroup({
@@ -49,6 +51,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       next: (data) => {
         const rate = data.conversion_rates[this.currentTo];
         if (rate) {
+          console.log("i'm in")
           this.exchangeRate = rate;
           this.USDEqualToEGP = rate;
         }
@@ -57,13 +60,13 @@ export class AmountCompComponent implements OnDestroy, OnInit{
         console.error('Error fetching exchange rate:', err);
       }
     });
-    this.transferFrom.get("send")?.valueChanges.subscribe(data => {
+    this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
       }
       
     })
-    this.transferFrom.get("get")?.valueChanges.subscribe(data => {
+    this.transferSubscription2 = this.transferFrom.get("get")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("send")?.setValue(data / this.exchangeRate, {emitEvent: false});
       }
@@ -142,6 +145,12 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       }
       if (this.currencySubscribtion3) {
         this.currencySubscribtion1.unsubscribe();
+      }
+      if (this.transferSubscription1) {  
+        this.transferSubscription1.unsubscribe();
+      }
+      if (this.transferSubscription2) {
+        this.transferSubscription2.unsubscribe(); 
       }
   }
   @HostListener('document:click', ['$event'])
