@@ -26,7 +26,11 @@
       </svg>
     </div>
 
-    <div class="flex flex-col mx-auto w-[40%] p-8 space-y-4">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col mx-auto w-[40%] p-8 space-y-4"
+    >
       <span class="text-4xl">Login here</span>
       <span class="text-[#565552]">welcome back. Login to your account</span>
       <label for="email">Your email address</label>
@@ -35,6 +39,7 @@
         id="email"
         type="text"
         placeholder="Email"
+        formControlName="email"
       />
       <label for="password">Password</label>
       <input
@@ -42,12 +47,16 @@
         type="password"
         id="password"
         placeholder="Password"
+        formControlName="password"
       />
-      <button class="prim-button text-white rounded-[6.5px] py-4 px-8">
+      <button
+        type="submit"
+        class="prim-button text-white rounded-[6.5px] py-4 px-8"
+      >
         Login
       </button>
       <span>Don't have an account? <a href="/">Create Account</a></span>
-    </div>
+    </form>
     <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
       <span>©Speedo Transfer Payments Limited 2024</span>
     </div>
@@ -183,19 +192,35 @@
   </div>
 </div>
 
-<div class="flex space-x-4 w-910-max:text-[16px]">
+<div *ngIf="!tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
   <div class="flex gap-4 w-780-max:hidden">
-    <button (click)="handleOpenLoginModal()" class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
-    Login
-  </button>
-  <button (click)="handleOpenRegisterModal()" class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
-    Register Now
-  </button>
+    <button
+      (click)="handleOpenLoginModal()"
+      class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4"
+    >
+      Login
+    </button>
+    <button
+      (click)="handleOpenRegisterModal()"
+      class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4"
+    >
+      Register Now
+    </button>
   </div>
-  
-  <svg class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+
+  <svg
+    class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+  >
     <path
       d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
     />
   </svg>
 </div>
+
+<!-- <div *ngIf="tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
+  <div class="">
+    <button>hello</button>
+  </div>
+</div> -->
