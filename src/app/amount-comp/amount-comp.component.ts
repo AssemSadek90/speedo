@@ -12,6 +12,15 @@ export function greaterThanZeroValidator(): ValidatorFn {
     return value > 0 ? null : { greaterThanZero: true };
   };
 }
+export function twelveDigitValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (value && !/^\d{12}$/.test(value)) {
+      return { 'twelveDigit': { value: control.value } };
+    }
+    return null;
+  };
+}
 @Component({
   selector: 'app-amount-comp',
   standalone: true,
@@ -28,18 +37,21 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
   isModalHidden: boolean = true;
+  isSubmitted: boolean = false;
   exchangeRate!: number;
   USDEqualToEGP!: number;
   currencySubscribtion1!: Subscription;
   currencySubscribtion2!: Subscription;
   currencySubscribtion3!: Subscription;
+  transferSubscription1!: Subscription | undefined;
+  transferSubscription2!: Subscription | undefined;
 
 
   transferFrom: FormGroup = new FormGroup({
     send: new FormControl(0, [ greaterThanZeroValidator()]),
     get: new FormControl(0, [ greaterThanZeroValidator()]),
     recipientName: new FormControl('', [Validators.required]),
-    recipientAccount: new FormControl('', [Validators.required, Validators.email]),
+    recipientAccount: new FormControl('', [Validators.required, twelveDigitValidator()]),
   })
   constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService) {
     
@@ -49,6 +61,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       next: (data) => {
         const rate = data.conversion_rates[this.currentTo];
         if (rate) {
+          console.log("i'm in")
           this.exchangeRate = rate;
           this.USDEqualToEGP = rate;
         }
@@ -57,13 +70,13 @@ export class AmountCompComponent implements OnDestroy, OnInit{
         console.error('Error fetching exchange rate:', err);
       }
     });
-    this.transferFrom.get("send")?.valueChanges.subscribe(data => {
+    this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
       }
       
     })
-    this.transferFrom.get("get")?.valueChanges.subscribe(data => {
+    this.transferSubscription2 = this.transferFrom.get("get")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("send")?.setValue(data / this.exchangeRate, {emitEvent: false});
       }
@@ -128,7 +141,11 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     this.isModalHidden = true;
    }
   onSubmit(form: FormGroup): void {
-    if (form.invalid) return;
+    if (form.invalid) {
+      this.isSubmitted = true;
+      return;
+    };
+    this.isSubmitted = false;
     this.globalService.setTransferStatusVariable("confirmation");
     this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value) } });
     console.log("Submit button clicked");
@@ -142,6 +159,12 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       }
       if (this.currencySubscribtion3) {
         this.currencySubscribtion1.unsubscribe();
+      }
+      if (this.transferSubscription1) {  
+        this.transferSubscription1.unsubscribe();
+      }
+      if (this.transferSubscription2) {
+        this.transferSubscription2.unsubscribe(); 
       }
   }
   @HostListener('document:click', ['$event'])

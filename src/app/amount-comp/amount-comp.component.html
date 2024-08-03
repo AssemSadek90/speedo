@@ -175,10 +175,15 @@
         transferFrom.get('recipientAccount')?.invalid &&
         transferFrom.get('recipientAccount')?.touched
       ">
-      Valid email is required.
+      Valid account is required.
     </div>
     <button type="submit" class="text-white py-4 px-8 bg-[#871E35] rounded-md w-545-max:py-2">
       Continue
     </button>
+    <div class="text-[#871E35]" *ngIf="
+        transferFrom.invalid && isSubmitted
+      ">
+      Please ensure that all fields are filled out correctly.
+    </div>
   </form>
 </div>
