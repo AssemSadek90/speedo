@@ -125,7 +125,7 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@angular/animations@^18.0.0", "@angular/animations@^18.0.0 || ^19.0.0", "@angular/animations@18.1.2":
+"@angular/animations@^18.0.0", "@angular/animations@^18.0.0 || ^19.0.0", "@angular/animations@^18.1.0", "@angular/animations@18.1.2":
   version "18.1.2"
   resolved "https://registry.npmjs.org/@angular/animations/-/animations-18.1.2.tgz"
   integrity sha512-Gbqp3TSrkDOQgxCMK7qm+IBFxw8+IgyA//S5ZgXt2qrrhQWVDF4uQJbzusqDSUcHpdtOD05X81NFgUc8f13UFA==
@@ -165,7 +165,7 @@
     vite "5.3.2"
     watchpack "2.4.1"
 
-"@angular/cdk@18.1.2":
+"@angular/cdk@^18.1.0", "@angular/cdk@18.1.2":
   version "18.1.2"
   resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-18.1.2.tgz"
   integrity sha512-yiAJ/9AMVF2zk7VLEuyJxNJwpV84xLlf0zCaXiYIs6Z8xU6m8N9KR2nqxC59gQc4nTjItmoO/Sgk7XH0X4yGOQ==
@@ -197,7 +197,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^18.0.0", "@angular/common@^18.0.0 || ^19.0.0", "@angular/common@18.1.2":
+"@angular/common@^18.0.0", "@angular/common@^18.0.0 || ^19.0.0", "@angular/common@^18.1.0", "@angular/common@18.1.2":
   version "18.1.2"
   resolved "https://registry.npmjs.org/@angular/common/-/common-18.1.2.tgz"
   integrity sha512-PXzRH5fCSmjGwNvopPfwAxcMqQPFLamyIjVJa5mwTyk5FLhKNrNecSo7m6ZpsfLPsW5Ipk/ups9RJD0Mep82Hw==
@@ -205,9 +205,9 @@
     tslib "^2.3.0"
 
 "@angular/compiler-cli@^18.0.0":
-  version "18.1.2"
-  resolved "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-18.1.2.tgz"
-  integrity sha512-u8VMgPFECfu+Usl8nrl6zVPDEjnXK0XH5DdQPVo4c3NDI6zStugLJbQ+OLIsHYfzJHdxxVSsF56URG5OcVTLEw==
+  version "18.1.3"
+  resolved "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-18.1.3.tgz"
+  integrity sha512-e9t5v/L1KqPLUQL+WU+d70MBBFcSRuwqbkluZgdDjdW5VelYjzlVzXdrzV6jFElP48T3kQCxJN1dAJkAvKjdOg==
   dependencies:
     "@babel/core" "7.24.9"
     "@jridgewell/sourcemap-codec" "^1.4.14"
@@ -218,14 +218,14 @@
     tslib "^2.3.0"
     yargs "^17.2.1"
 
-"@angular/compiler@^18.0.0", "@angular/compiler@18.1.2":
-  version "18.1.2"
-  resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-18.1.2.tgz"
-  integrity sha512-ePoSW4S899bN+QKYFCDUHX8tSvycPxncduqsG403IHzawelG8cRMjtxNAN01tJvN1KcKwR6YUYdWt8PYgipBhw==
+"@angular/compiler@^18.0.0", "@angular/compiler@18.1.2", "@angular/compiler@18.1.3":
+  version "18.1.3"
+  resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-18.1.3.tgz"
+  integrity sha512-Mrcd+YGsz02GVnVlVbzYp7EJIVoPOIHMvhll1OiylhjQElNVeJCLPIvjVYdylzOUDctXNlchkGf/LbA7BYMbXg==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^18.0.0", "@angular/core@^18.0.0 || ^19.0.0", "@angular/core@18.1.2":
+"@angular/core@^18.0.0", "@angular/core@^18.0.0 || ^19.0.0", "@angular/core@^18.1.0", "@angular/core@18.1.2", "@angular/core@18.1.3":
   version "18.1.2"
   resolved "https://registry.npmjs.org/@angular/core/-/core-18.1.2.tgz"
   integrity sha512-/wiewpA8KpEkXf3E/Q0+0H3Dgg5zCG/+vzAUVIOGP+0tYk8no0NUecHyXLjz0hRQOJ6a3zMKVtZO3wYl8WNGEg==
@@ -253,7 +253,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/platform-browser@^18.0.0", "@angular/platform-browser@^18.0.0 || ^19.0.0", "@angular/platform-browser@18.1.2":
+"@angular/platform-browser@^18.0.0", "@angular/platform-browser@^18.0.0 || ^19.0.0", "@angular/platform-browser@^18.1.0", "@angular/platform-browser@18.1.2":
   version "18.1.2"
   resolved "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-18.1.2.tgz"
   integrity sha512-G/9dU6J+RyJ4qfWcxgVdUsVEF/2lQKCpC24spongOwn7yCTrORkopFEmuuwftZXaFoduxE2Q1i4GCiQkqcHRwQ==
@@ -268,7 +268,7 @@
     tslib "^2.3.0"
     xhr2 "^0.2.0"
 
-"@angular/router@^18.0.0":
+"@angular/router@^18.0.0", "@angular/router@^18.1.0":
   version "18.1.2"
   resolved "https://registry.npmjs.org/@angular/router/-/router-18.1.2.tgz"
   integrity sha512-2+3IbCsnD+PukwrdD2oW7H69hPNs4raMzmiufD0HyTz8C75G1mYvRCzaf8qN41e9r/AsIGzwrczw30AgnCEmzw==
@@ -1265,6 +1265,26 @@
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.5.0.tgz"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
+"@coreui/angular@~5.2.11":
+  version "5.2.11"
+  resolved "https://registry.npmjs.org/@coreui/angular/-/angular-5.2.11.tgz"
+  integrity sha512-G49FfsWQjb+np69UIwP+OPZcJjUcW+fTk+kV/c55Ellv767aumUAAmyy90mE2d7ONpRFkLSPX6xMOOV9iL9TaQ==
+  dependencies:
+    "@popperjs/core" "~2.11.8"
+    tslib "^2.3.0"
+
+"@coreui/coreui@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.npmjs.org/@coreui/coreui/-/coreui-5.1.0.tgz"
+  integrity sha512-3t8Ekib5pUVYp6mpCvXL9oGyFJ9znFqWWHwxUjKD8QHW0JMJ2znjS5oADICQ+xvWaK6ATgwIipjQGi7lQ819MA==
+
+"@coreui/icons-angular@~5.2.11":
+  version "5.2.11"
+  resolved "https://registry.npmjs.org/@coreui/icons-angular/-/icons-angular-5.2.11.tgz"
+  integrity sha512-07Vu2mcyIseH0LG9y6w7KZLeynp/LlPL/d2fk2fay4PgDMbsiThDDZT4XxUl1pjwK40QsqTQ7Qk1E1B4A2QFKQ==
+  dependencies:
+    tslib "^2.3.0"
+
 "@discoveryjs/json-ext@0.5.7":
   version "0.5.7"
   resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
@@ -1625,6 +1645,11 @@
   version "0.11.0"
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
+
+"@popperjs/core@^2.11.8", "@popperjs/core@~2.11.8":
+  version "2.11.8"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
+  integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
 "@rollup/rollup-win32-x64-msvc@4.18.0":
   version "4.18.0"
@@ -5217,7 +5242,7 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.1.0, postcss-value-parser@^
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-"postcss@^7.0.0 || ^8.0.1", postcss@^8.0.0, postcss@^8.1.0, postcss@^8.2.14, postcss@^8.4.0, postcss@^8.4.21, postcss@^8.4.23, postcss@^8.4.33, postcss@^8.4.38, postcss@^8.4.40, postcss@>=8.0.9:
+"postcss@^7.0.0 || ^8.0.1", postcss@^8.0.0, postcss@^8.1.0, postcss@^8.2.14, postcss@^8.4.21, postcss@^8.4.23, postcss@^8.4.33, postcss@^8.4.38, postcss@^8.4.40, postcss@>=8.0.9:
   version "8.4.40"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.40.tgz"
   integrity sha512-YF2kKIUzAofPMpfH6hOi2cGnv/HrUlfucspc7pDyvv7kGdqXrfj8SCl/t8owkEgKEuu8ZcRjSOxFxVLqwChZ2Q==
@@ -5226,7 +5251,7 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.1.0, postcss-value-parser@^
     picocolors "^1.0.1"
     source-map-js "^1.2.0"
 
-postcss@8.4.38:
+postcss@^8.4.0, postcss@8.4.38:
   version "8.4.38"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.38.tgz"
   integrity sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==
@@ -5536,7 +5561,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-"rxjs@^6.5.3 || ^7.4.0", rxjs@~7.8.0, rxjs@7.8.1:
+"rxjs@^6.5.3 || ^7.4.0", rxjs@^7.8.1, rxjs@~7.8.0, rxjs@7.8.1:
   version "7.8.1"
   resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
