@@ -1,3 +1,4 @@
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Component, HostListener } from '@angular/core';
 import { NavLoginCompComponent } from '../nav-login-comp/nav-login-comp.component';
 import { NgClass, NgIf } from '@angular/common';
@@ -5,7 +6,7 @@ import { NgClass, NgIf } from '@angular/common';
 @Component({
   selector: 'navbar-comp',
   standalone: true,
-  imports: [NavLoginCompComponent, NgIf, NgClass],
+  imports: [NavLoginCompComponent, NgIf, NgClass, RouterLink, RouterLinkActive],
   templateUrl: './navbar-comp.component.html',
   styleUrl: './navbar-comp.component.scss'
 })

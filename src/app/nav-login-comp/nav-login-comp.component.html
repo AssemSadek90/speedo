@@ -1,9 +1,194 @@
+<div
+  *ngIf="!isLoginModalHidden"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleOpenLoginModal()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+
+    <div class="flex flex-col mx-auto w-[40%] p-8 space-y-4">
+      <span class="text-4xl">Login here</span>
+      <span class="text-[#565552]">welcome back. Login to your account</span>
+      <label for="email">Your email address</label>
+      <input
+        class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+        id="email"
+        type="text"
+        placeholder="Email"
+      />
+      <label for="password">Password</label>
+      <input
+        class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+        type="password"
+        id="password"
+        placeholder="Password"
+      />
+      <button class="prim-button text-white rounded-[6.5px] py-4 px-8">
+        Login
+      </button>
+      <span>Don't have an account? <a href="/">Create Account</a></span>
+    </div>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="!isRegisterModalHidden"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleOpenRegisterModal()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="flex flex-col px-[5%] space-y-4">
+      <span class="text-4xl">Create Your Account</span>
+      <span class="text-[#565552]"
+        >Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+        tempor incididunt ut labore.</span
+      >
+    </div>
+    <form class="grid grid-cols-2 gap-x-[5%] w-[70%] mx-auto overflow-y-scroll">
+      <div class="flex flex-col space-y-4">
+        <label for="username">User Name</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          id="username"
+          type="text"
+        />
+        <label for="email">Email address</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          id="email"
+          type="email"
+        />
+        <label for="country">Country</label>
+        <select
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          name="country"
+          id="country"
+        >
+          <option value="EG">EG</option>
+          <option value="UK">UK</option>
+          <option value="US">US</option>
+          <option value="DE">DE</option>
+        </select>
+      </div>
+      <div class="flex flex-col space-y-4">
+        <div class="flex space-x-4">
+          <div class="flex flex-col space-y-4">
+            <label for="day">Day of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="day"
+              name="day"
+            >
+              <option value="">DD</option>
+              <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <label for="month">Month of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="month"
+              name="month"
+              [(ngModel)]="selectedMonth"
+              (change)="onMonthChange(selectedMonth)"
+            >
+              <option value="">Month</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </option>
+            </select>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <label for="year">Year of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="year"
+              name="year"
+              [(ngModel)]="selectedYear"
+              (change)="onYearChange(selectedYear)"
+            >
+              <option value="">YYYY</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <label for="password">Password</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          type="password"
+          id="password"
+        />
+        <label for="confirm-password">Confirm Password</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          type="password"
+          id="confirm-password"
+        />
+      </div>
+      <button
+        class="prim-button col-span-2 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
+      >
+        Create An Account
+      </button>
+    </form>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
+</div>
+
 <div class="flex space-x-4 w-910-max:text-[16px]">
   <div class="flex gap-4 w-780-max:hidden">
-    <button class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
+    <button (click)="handleOpenLoginModal()" class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
     Login
   </button>
-  <button class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
+  <button (click)="handleOpenRegisterModal()" class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4">
     Register Now
   </button>
   </div>

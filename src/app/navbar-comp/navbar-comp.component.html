@@ -1,10 +1,20 @@
+
 <nav class="h-24 flex justify-center items-center w-485-max:justify-between w-485-max:px-[20px] relative">
   <div class="text-[32px] min-w-[30%] w-910-max:text-[24px] w-485-max:min-w-auto w-485-max:text-[1rem]">Speedo Transfer</div>
   <div class="min-w-[60%] space-x-6 flex justify-end justify-self-stretch w-485-max:min-w-0">
     <div [ngClass]="{ 'inline-block': toggleList, 'hidden': !toggleList }" class="flex items-center gap-6 w-780-max:absolute w-780-max:top-[100%] w-780-max:w-full w-780-max:flex-col w-780-max:z-40 w-780-max:bg-white">
-      <button class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]">Home</button>
-      <button class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]">Money Transfer</button>
-      <button class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]">My Account</button>
+      <a
+      class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a routerLink="/transfer" routerLinkActive="active"
+    class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]">Money Transfer</a>
+    <a routerLink="/myaccount" routerLinkActive="active"
+    class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]">My Account</a>
+      
     </div>
     
     <svg (click) = "listDropdown()" class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:h-[16px] w-485-max:w-[16px] fill-[#871E35]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
