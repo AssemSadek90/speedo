@@ -20,6 +20,8 @@ export class LoginService {
       const response = await firstValueFrom(this.http.post<any>(`${this.apiUrl}${this.apiEndPoint}`, { username, password }));
       this.token = response.token;
       this.id = response.id;
+      sessionStorage.setItem('token', this.token!);
+      sessionStorage.setItem('id', String(this.id!));
       return response;
     } catch (error) {
       console.error('Login failed', error);
