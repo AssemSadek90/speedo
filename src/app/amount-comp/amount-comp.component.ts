@@ -12,6 +12,15 @@ export function greaterThanZeroValidator(): ValidatorFn {
     return value > 0 ? null : { greaterThanZero: true };
   };
 }
+export function twelveDigitValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (value && !/^\d{12}$/.test(value)) {
+      return { 'twelveDigit': { value: control.value } };
+    }
+    return null;
+  };
+}
 @Component({
   selector: 'app-amount-comp',
   standalone: true,
@@ -28,6 +37,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
   isModalHidden: boolean = true;
+  isSubmitted: boolean = false;
   exchangeRate!: number;
   USDEqualToEGP!: number;
   currencySubscribtion1!: Subscription;
@@ -41,7 +51,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     send: new FormControl(0, [ greaterThanZeroValidator()]),
     get: new FormControl(0, [ greaterThanZeroValidator()]),
     recipientName: new FormControl('', [Validators.required]),
-    recipientAccount: new FormControl('', [Validators.required, Validators.email]),
+    recipientAccount: new FormControl('', [Validators.required, twelveDigitValidator()]),
   })
   constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService) {
     
@@ -131,7 +141,11 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     this.isModalHidden = true;
    }
   onSubmit(form: FormGroup): void {
-    if (form.invalid) return;
+    if (form.invalid) {
+      this.isSubmitted = true;
+      return;
+    };
+    this.isSubmitted = false;
     this.globalService.setTransferStatusVariable("confirmation");
     this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value) } });
     console.log("Submit button clicked");
