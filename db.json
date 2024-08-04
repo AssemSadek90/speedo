@@ -32,6 +32,15 @@
     }
   ],
   "profileInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phoneNumber": "(555) 123-4567",
+    "gender": "Male",
+    "accNum": "1234567890",
+    "balance": 1234.56
+  },
+  "updateProfileInfo": {
     "firstName": "Jonathon",
     "lastName": "Smith",
     "email": "john.smith@example.com",

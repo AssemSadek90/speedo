@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractContro
 import { CurrencyService } from '../currency-service.service';
 import { Subscription } from 'rxjs';
 import { FavouriteService } from '../../shared/services/favourite.service';
+import { ProfileInfoService } from '../../shared/services/profile-info.service';
 
 export function greaterThanZeroValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -54,7 +55,10 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   transferSubscription2!: Subscription | undefined;
   token!: string;
   listFavourites!: any[];
-  listFavouritesSubscription!: Subscription 
+  profileInfo: any;
+  listFavouritesSubscription!: Subscription;
+  profileInfoSubscription!: Subscription;
+
 
 
   transferFrom: FormGroup = new FormGroup({
@@ -63,7 +67,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     recipientName: new FormControl('', [Validators.required]),
     recipientAccount: new FormControl('', [Validators.required, digitsOnlyValidator()]),
   })
-  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, @Inject(DOCUMENT) private document: Document, private favouriteService: FavouriteService) {
+  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, @Inject(DOCUMENT) private document: Document, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService) {
     const sessionStorage = document.defaultView?.sessionStorage;
     if(sessionStorage) {
       sessionStorage.setItem("accessToken", "HelloWorld");
@@ -97,6 +101,9 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     this.favouriteService.getFavouritesRequest().subscribe(res  => {
       this.listFavourites = res;
     })
+    this.profileInfoSubscription = this.profileInfoService.getProfileInfo().subscribe(res => {
+      this.profileInfo = res;
+    });
   }
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
@@ -163,8 +170,9 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       return;
     };
     this.isSubmitted = false;
+    this.globalService.setDataOfForm({amountToSend: Number(this.transferFrom.value.send), amountToRecieve: Number(this.transferFrom.value.get), currencyToSend: this.currencyFrom, currencyToRecieve: this.currencyTo, fromName: this.profileInfo.firstName + " " + this.profileInfo.lastName, toName: this.transferFrom.value.recipientName, fromAccNum : Number(this.profileInfo.accNum), toAccNum: Number(this.transferFrom.value.recipientAccount), fees: Number(this.transferFrom.value.send) * 0.01897});
     this.globalService.setTransferStatusVariable("confirmation");
-    this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value), currencyFrom: this.currencyFrom, currencyTo: this.currencyTo } });
+    this.router.navigate(["/transfer", "confirmation"]);
     console.log("Submit button clicked");
    }
   ngOnDestroy(): void {
@@ -186,6 +194,9 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       if (this.listFavouritesSubscription) {
         this.listFavouritesSubscription.unsubscribe()
       }
+      if (this.profileInfoSubscription) {
+        this.profileInfoSubscription.unsubscribe();
+      }
   }
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
@@ -199,6 +210,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     if ( (!target.closest('.favorite-modal') && this.isModalHidden === false)|| target.closest(".favorite-button")) {
       this.isModalHidden = !this.isModalHidden;
     }
+    
   }
 
 

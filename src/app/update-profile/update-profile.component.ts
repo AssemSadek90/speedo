@@ -3,6 +3,7 @@ import { ProfileInfoService } from '../../shared/services/profile-info.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UpdataProfileInfoService } from '../../shared/services/updata-profile-info.service';
 
 @Component({
   selector: 'app-update-profile',
@@ -19,7 +20,8 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   messageUpdate!: string;
 
   getProfileInfoSubscription!: Subscription;
-  constructor(private profileService: ProfileInfoService){}
+  updateProfileInfoSubscription!: Subscription;
+  constructor(private profileService: ProfileInfoService,private updataProfileInfoService: UpdataProfileInfoService){}
   ngOnInit(): void {
       this.getProfileInfoSubscription = this.profileService.getProfileInfo().subscribe((res: any) => {
         this.firstName = res.firstName;
@@ -33,7 +35,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
       this.messageUpdate = "Please fill all fields correctly";
       return;
     }
-    this.profileService.updateProfileInfo(form.value.firstName, form.value.lastName, form.value.email, form.value.phoneNumber, 200).subscribe(res => {
+    this.updateProfileInfoSubscription = this.updataProfileInfoService.updateProfileInfo(form.value.firstName, form.value.lastName, form.value.email, form.value.phoneNumber, 200).subscribe(res => {
       if (res.status === 200) {
         this.messageUpdate = "The profile was successfully updated";
       }else {
@@ -44,6 +46,9 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
       if (this.getProfileInfoSubscription) {
         this.getProfileInfoSubscription.unsubscribe();
+      }
+      if (this.updateProfileInfoSubscription) {
+        this.updateProfileInfoSubscription.unsubscribe();
       }
   }
 }

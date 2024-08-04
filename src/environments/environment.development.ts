@@ -21,5 +21,8 @@ export const environment = {
     },
     changePassword: {
         endpoint: '/changePassword',
+    },
+    updateProfileInfo: {
+        endpoint: '/updateProfileInfo',
     }
 };

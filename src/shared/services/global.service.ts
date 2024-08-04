@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { DataOfForm } from './models/dataOfForm';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
-  public transferStatus: string;
+  private transferStatus: string;
+  private formdata!: DataOfForm;
 
   constructor() {
     this.transferStatus = 'amount';
@@ -16,5 +18,12 @@ export class GlobalService {
 
   getTransferStatusVariable(): string {
     return this.transferStatus;
+  }
+  setDataOfForm(value: DataOfForm): void {
+    this.formdata = value;
+  }
+
+  getDataOfForm(): DataOfForm {
+    return this.formdata;
   }
 }
