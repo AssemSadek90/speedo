@@ -29,7 +29,7 @@
     <form
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
-      class="flex flex-col mx-auto w-[40%] p-8 space-y-4"
+      class="flex flex-col mx-auto lg:w-[40%] md:w-[60%] sm:w-[80%] p-8 space-y-4 overflow-auto"
     >
       <span class="text-4xl">Login here</span>
       <span class="text-[#565552]">welcome back. Login to your account</span>
@@ -55,7 +55,12 @@
       >
         Login
       </button>
-      <span>Don't have an account? <a href="/">Create Account</a></span>
+      <span
+        >Don't have an account?
+        <span class="prim" (click)="handleCreateAccount()"
+          >Create Account</span
+        ></span
+      >
     </form>
     <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
       <span>©Speedo Transfer Payments Limited 2024</span>
@@ -74,7 +79,7 @@
       <span class="text-4xl">Speedo Transfer</span>
       <svg
         class="cursor-pointer"
-        (click)="handleOpenRegisterModal()"
+        (click)="handleCloseRegisterModal()"
         width="32"
         height="32"
         viewBox="0 0 24 24"
@@ -97,30 +102,47 @@
         tempor incididunt ut labore.</span
       >
     </div>
-    <form class="grid grid-cols-2 gap-x-[5%] w-[70%] mx-auto overflow-y-scroll">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmitRegister()"
+      class="grid lg:grid-cols-2 md:grid-col-1 sm:grid-col-1 sm:gap-y-4 px-4 gap-x-[5%] lg:w-[70%] md:w-[90%] sm:w-[95%] mx-auto overflow-y-auto"
+    >
       <div class="flex flex-col space-y-4">
-        <label for="username">User Name</label>
-        <input
-          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
-          id="username"
-          type="text"
-        />
+        <div class="flex space-x-4">
+          <label class="w-[50%]" for="firstName">First Name</label>
+          <label class="w-[50%]" for="lastName">Last Name</label>
+        </div>
+        <div class="flex space-x-4">
+          <input
+            class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8 max-w-[48%]"
+            id="firstName"
+            type="text"
+            formControlName="firstName"
+          />
+          <input
+            class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8 max-w-[48%]"
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+          />
+        </div>
         <label for="email">Email address</label>
         <input
           class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
           id="email"
           type="email"
+          formControlName="email"
         />
-        <label for="country">Country</label>
+        <label for="nationality">Country</label>
         <select
           class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
-          name="country"
-          id="country"
+          id="nationality"
+          formControlName="nationality"
         >
-          <option value="EG">EG</option>
-          <option value="UK">UK</option>
-          <option value="US">US</option>
-          <option value="DE">DE</option>
+          <option value="Egyptian">EG</option>
+          <option value="British">UK</option>
+          <option value="American">US</option>
+          <option value="German">DE</option>
         </select>
       </div>
       <div class="flex flex-col space-y-4">
@@ -131,6 +153,7 @@
               class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
               id="day"
               name="day"
+              formControlName="day"
             >
               <option value="">DD</option>
               <option *ngFor="let day of days" [value]="day">{{ day }}</option>
@@ -142,6 +165,7 @@
               class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
               id="month"
               name="month"
+              formControlName="month"
               [(ngModel)]="selectedMonth"
               (change)="onMonthChange(selectedMonth)"
             >
@@ -157,6 +181,7 @@
               class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
               id="year"
               name="year"
+              formControlName="year"
               [(ngModel)]="selectedYear"
               (change)="onYearChange(selectedYear)"
             >
@@ -168,23 +193,74 @@
           </div>
         </div>
         <label for="password">Password</label>
-        <input
-          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
-          type="password"
-          id="password"
-        />
+        <div
+          class="flex justify-between items-center border border-[#B0AFAE] rounded-[6.5px] pe-4"
+        >
+          <input
+            class="py-4 px-8 grow"
+            id="pass-input1"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="************"
+          />
+          <img
+            *ngIf="!showPassword"
+            (click)="handleShowPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Close-eye.svg"
+            alt="👁️"
+          />
+          <img
+            *ngIf="showPassword"
+            (click)="handleShowPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Open-eye.svg"
+            alt="👁️"
+          />
+        </div>
         <label for="confirm-password">Confirm Password</label>
-        <input
-          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
-          type="password"
-          id="confirm-password"
-        />
+        <div
+          class="flex justify-between items-center border border-[#B0AFAE] rounded-[6.5px] pe-4"
+        >
+          <input
+            class="py-4 px-8 grow"
+            id="pass-input1"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            placeholder="************"
+          />
+          <img
+            *ngIf="!showConfirmPassword"
+            (click)="handleShowConfirmPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Close-eye.svg"
+            alt="👁️"
+          />
+          <img
+            *ngIf="showConfirmPassword"
+            (click)="handleShowConfirmPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Open-eye.svg"
+            alt="👁️"
+          />
+        </div>
+        <p class="text-sm font-light text-[#565552]">
+          The password should be at least eight characters long. To make it
+          stronger, use upper and lower case letters, numbers, and symbols like
+          ! " ? $ % ^ & )
+        </p>
       </div>
       <button
-        class="prim-button col-span-2 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
+        type="submit"
+        class="prim-button lg:col-span-2 md:col-span-1 sm:col-span-1 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
       >
         Create An Account
       </button>
+      <span
+        >Already have an account?
+        <span class="prim mt-4" (click)="handleLoginFromRegister()"
+          >Login</span
+        ></span
+      >
     </form>
     <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
       <span>©Speedo Transfer Payments Limited 2024</span>
@@ -208,15 +284,17 @@
     </button>
   </div>
 
-  <svg
-    class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
-  >
-    <path
-      d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
-    />
-  </svg>
+  <span (click)="handleOpenLoginModal()" class="w-780-max:pr-4 w-485-max:pr-4">
+    <svg
+      class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
+      />
+    </svg>
+  </span>
 </div>
 
 <div *ngIf="tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
