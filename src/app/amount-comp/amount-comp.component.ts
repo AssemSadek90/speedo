@@ -1,10 +1,12 @@
-import { NgIf } from '@angular/common';
-import { Component, HostListener, OnDestroy, OnInit, } from '@angular/core';
+import { DOCUMENT, NgFor, NgIf } from '@angular/common';
+import { Component, HostListener, Inject, OnDestroy, OnInit, } from '@angular/core';
 import { GlobalService } from '../../shared/services/global.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { CurrencyService } from '../currency-service.service';
 import { Subscription } from 'rxjs';
+import { FavouriteService } from '../../shared/services/favourite.service';
+import { ProfileInfoService } from '../../shared/services/profile-info.service';
 
 export function greaterThanZeroValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -21,19 +23,25 @@ export function twelveDigitValidator(): ValidatorFn {
     return null;
   };
 }
+export function digitsOnlyValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const isValid = /^\d*$/.test(control.value); 
+    return isValid ? null : { 'digitsOnly': { value: control.value } };
+  };
+}
 @Component({
   selector: 'app-amount-comp',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [NgIf, ReactiveFormsModule, NgFor],
   templateUrl: './amount-comp.component.html',
   styleUrl: './amount-comp.component.scss',
 
 })
 export class AmountCompComponent implements OnDestroy, OnInit{
-  currentFrom: string = 'USD';
+  currencyFrom: string = 'USD';
   urlImgFrom: string = "assets/flags/united-states.png";
   urlImgTo: string = "assets/flags/egypt.png";
-  currentTo: string = 'EGP';
+  currencyTo: string = 'EGP';
   isFormListHidden: boolean = true;
   isToListHidden: boolean = true;
   isModalHidden: boolean = true;
@@ -45,31 +53,39 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   currencySubscribtion3!: Subscription;
   transferSubscription1!: Subscription | undefined;
   transferSubscription2!: Subscription | undefined;
+  token!: string;
+  listFavourites!: any[];
+  profileInfo: any;
+  listFavouritesSubscription!: Subscription;
+  profileInfoSubscription!: Subscription;
+
 
 
   transferFrom: FormGroup = new FormGroup({
-    send: new FormControl(0, [ greaterThanZeroValidator()]),
-    get: new FormControl(0, [ greaterThanZeroValidator()]),
+    send: new FormControl(0, [Validators.required, greaterThanZeroValidator()]),
+    get: new FormControl(0, [Validators.required, greaterThanZeroValidator()]),
     recipientName: new FormControl('', [Validators.required]),
-    recipientAccount: new FormControl('', [Validators.required, twelveDigitValidator()]),
+    recipientAccount: new FormControl('', [Validators.required, digitsOnlyValidator()]),
   })
-  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService) {
-    
+  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, @Inject(DOCUMENT) private document: Document, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService) {
+    const sessionStorage = document.defaultView?.sessionStorage;
+    if(sessionStorage) {
+      sessionStorage.setItem("accessToken", "HelloWorld");
+  }
   }
   ngOnInit(): void {
-    // this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
-    //   next: (data) => {
-    //     const rate = data.conversion_rates[this.currentTo];
-    //     if (rate) {
-    //       console.log("i'm in")
-    //       this.exchangeRate = rate;
-    //       this.USDEqualToEGP = rate;
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error('Error fetching exchange rate:', err);
-    //   }
-    // });
+    this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
+      next: (data) => {
+        const rate = data.conversion_rates[this.currencyTo];
+        if (rate) {
+          this.exchangeRate = rate;
+          this.USDEqualToEGP = rate;
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching exchange rate:', err);
+      }
+    });
     this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
@@ -82,17 +98,23 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       }
       
     })
+    this.favouriteService.getFavouritesRequest().subscribe(res  => {
+      this.listFavourites = res;
+    })
+    this.profileInfoSubscription = this.profileInfoService.getProfileInfo().subscribe(res => {
+      this.profileInfo = res;
+    });
   }
   handleClickFrom(): void {
     this.isFormListHidden =!this.isFormListHidden;
   }
-  handleSelectFrom(current: string, imgFlag: string): void {
-    this.currentFrom = current;
+  handleSelectFrom(currency: string, imgFlag: string): void {
+    this.currencyFrom = currency;
     this.urlImgFrom = imgFlag;
     this.isFormListHidden = true;
-    this.currencySubscribtion2 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
+    this.currencySubscribtion2 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
       next: (data) => {
-        const rate = data.conversion_rates[this.currentTo];
+        const rate = data.conversion_rates[this.currencyTo];
         if (rate) {
           this.exchangeRate = rate;
         }
@@ -109,13 +131,13 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   handleClickTo(): void {
     this.isToListHidden =!this.isToListHidden;
   }
-  handleSelectTo(current: string, imgFlag: string): void {
-    this.currentTo = current;
+  handleSelectTo(currency: string, imgFlag: string): void {
+    this.currencyTo = currency;
     this.urlImgTo = imgFlag;
     this.isToListHidden = true;
-    this.currencySubscribtion3 = this.currencyService.getExchangeRate(this.currentFrom).subscribe({
+    this.currencySubscribtion3 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
       next: (data) => {
-        const rate = data.conversion_rates[this.currentTo];
+        const rate = data.conversion_rates[this.currencyTo];
         if (rate) {
           this.exchangeRate = rate;
         }
@@ -143,13 +165,14 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     this.isModalHidden = true;
    }
   onSubmit(form: FormGroup): void {
-    // if (form.invalid) {
-    //   this.isSubmitted = true;
-    //   return;
-    // };
+    if (form.invalid) {
+      this.isSubmitted = true;
+      return;
+    };
     this.isSubmitted = false;
+    this.globalService.setDataOfForm({amountToSend: Number(this.transferFrom.value.send), amountToRecieve: Number(this.transferFrom.value.get), currencyToSend: this.currencyFrom, currencyToRecieve: this.currencyTo, fromName: this.profileInfo.firstName + " " + this.profileInfo.lastName, toName: this.transferFrom.value.recipientName, fromAccNum : Number(this.profileInfo.accNum), toAccNum: Number(this.transferFrom.value.recipientAccount), fees: Number(this.transferFrom.value.send) * 0.01897});
     this.globalService.setTransferStatusVariable("confirmation");
-    this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value) } });
+    this.router.navigate(["/transfer", "confirmation"]);
     console.log("Submit button clicked");
    }
   ngOnDestroy(): void {
@@ -168,19 +191,26 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       if (this.transferSubscription2) {
         this.transferSubscription2.unsubscribe(); 
       }
+      if (this.listFavouritesSubscription) {
+        this.listFavouritesSubscription.unsubscribe()
+      }
+      if (this.profileInfoSubscription) {
+        this.profileInfoSubscription.unsubscribe();
+      }
   }
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.from-current-list')) {
+    if (!target.closest('.from-currency-list')) {
       this.isFormListHidden = true;
     }
-    if (!target.closest('.to-current-list')) {
+    if (!target.closest('.to-currency-list')) {
       this.isToListHidden = true;
     }
     if ( (!target.closest('.favorite-modal') && this.isModalHidden === false)|| target.closest(".favorite-button")) {
       this.isModalHidden = !this.isModalHidden;
     }
+    
   }
 
 

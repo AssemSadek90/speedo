@@ -1,5 +1,6 @@
-import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, ViewChildren, QueryList, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
+import { PaymentHistoryService } from '../../shared/services/payment-history.service';
 
 @Component({
   selector: 'app-payment-history',
@@ -8,18 +9,24 @@ import { CommonModule } from '@angular/common';
   templateUrl: './payment-history.component.html',
   styleUrls: ['./payment-history.component.scss']
 })
-export class PaymentHistoryComponent {
+export class PaymentHistoryComponent implements OnInit {
   @ViewChildren('textToCopy') textToCopies!: QueryList<ElementRef<HTMLParagraphElement>>;
-  copyIcons: string[] = ['/assets/icons/copy.svg', '/assets/icons/copy.svg']; 
+  @ViewChildren('imgToCopy') imgToCopies!: QueryList<ElementRef<HTMLImageElement>>;
 
-  items = [
-    { accountNumber: '6785 4987 6543' },
-    { accountNumber: '1234 5678 9012' }
-  ];
+  listHistory!: any[];
+
+  constructor(private paymentHistoryService: PaymentHistoryService){}
+  ngOnInit(): void {
+      this.paymentHistoryService.getPaymentHistory().subscribe(res => {
+        this.listHistory = res;
+      })
+  }
 
   copyText(index: number): void {
     const element = this.textToCopies.toArray()[index].nativeElement;
+    const elementImg = this.imgToCopies.toArray()[index].nativeElement;
     const range = document.createRange();
+
     range.selectNode(element);
 
     window.getSelection()?.removeAllRanges();
@@ -27,10 +34,10 @@ export class PaymentHistoryComponent {
 
     try {
       document.execCommand('copy');
-      this.copyIcons[index] = '/assets/icons/check mark.svg'; 
+      elementImg.src = '/assets/icons/check mark.svg'; 
 
       setTimeout(() => {
-        this.copyIcons[index] = '/assets/icons/copy.svg'; 
+        elementImg.src = '/assets/icons/copy.svg'; 
       }, 1500);
     } catch (err) {
       console.error('Failed to copy text: ', err);

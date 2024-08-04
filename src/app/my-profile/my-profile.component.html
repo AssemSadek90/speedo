@@ -1,38 +1,42 @@
-<section class="container mx-auto px-8 py-1">
-  <h4 class="text-2xl">My Profile</h4>
-  <br />
-  <div class="mt-8 flex">
-    <p class="text-8xl font-bold text-black m">10000<span>$</span></p>
-    <h3 class="text-4xl font-extrabold pt-8">Balance</h3>
+<section class="container mx-auto px-8 py-1 w-780-max:px-[1rem]">
+  <h4 class="text-2xl w-780-max:text-[5px]">My Profile</h4>
+  <div class="mt-8 flex w-780-max:flex-row">
+    <p class="text-8xl font-bold text-black flex items-center w-1190-max:text-[3rem] w-780-max:text-[1rem]">{{profileBalance}}<span>$</span></p>
+    <h3 class="text-4xl font-extrabold pt-8 w-1190-max:pt-0 w-780-max:text-[20px] w-780-max:text-[15px]">Balance</h3>
   </div>
+  <br><br>
   <div class="flex">
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6 w-780-max:gap-[1rem]">
       <div class="flex items-center">
-        <p class="text-gray-700 font-medium text-base">First Name:</p>
+        <p class="text-gray-700 font-medium text-base  w-780-max:text-[10px] w-780-max:w-[55px]">First Name:</p>
       </div>
       <div class="flex items-center">
-        <p class="text-gray-700 font-medium text-base">Email:</p>
+        <p class="text-gray-700 font-medium text-base  w-780-max:text-[10px] w-780-max:w-[55px]">Email:</p>
       </div>
       <div class="flex items-center">
-        <p class="text-gray-700 font-medium text-base">Phone:</p>
+        <p class="text-gray-700 font-medium text-base  w-780-max:text-[10px] w-780-max:w-[55px]">Phone:</p>
       </div>
       <div class="flex items-center">
-        <p class="text-gray-700 font-medium text-base">Gender:</p>
-      </div>
-    </div>
-    <div class="data flex flex-col gap-6">
-      <div class="flex items-center">
-        <p class="text-gray-900">Jonathon Smith</p>
-      </div>
-      <div class="flex items-center">
-        <p class="text-gray-900 text-base">jhonathonsmith at gmail.com</p>
-      </div>
-      <div class="flex items-center">
-        <p class="text-gray-900">+880125412624</p>
-      </div>
-      <div class="flex items-center">
-        <p class="text-gray-900">Male</p>
+        <p class="text-gray-700 font-medium text-base  w-780-max:text-[10px] w-780-max:w-[55px]">Gender:</p>
       </div>
     </div>
-  </div>
-</section>
+    <div class="data flex flex-col gap-6 ">
+      <div>
+        <div class="flex items-center">
+          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profileName }}</p>
+        </div>
+        <br>
+        <div class="flex items-center">
+          <p class="text-gray-900 text-base w-780-max:text-[10px] ">{{ profileEmail }}</p>
+        </div>
+        <br>
+        <div class="flex items-center">
+          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profilePhone }}</p>
+        </div>
+        <br>
+        <div class="flex items-center">
+          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profileGender }}</p>
+        </div>
+      </div>
+    </div>
+  

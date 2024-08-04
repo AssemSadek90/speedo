@@ -16,7 +16,10 @@
       Favourite List
     </div>
     <div class="flex flex-col gap-4 overflow-y-auto h-[500px] w-545-max:h-[300px]">
-      <div (click)="handleItemListFavurite('Jonathon Smith', '123456789456')"
+      <div>
+
+      </div>
+      <div *ngFor="let item of listFavourites" (click)="handleItemListFavurite(item.name, item.account)"
         class="p-4 flex gap-8 w-full bg-[#F6F6F6] rounded-lg cursor-pointer w-485-max:gap-[1rem]">
         <div class="flex items-center">
           <svg class="bg-[#E3E2E2] p-2 rounded-full w-545-max:w-[45px] w-545-max:h-[45px]" width="76" height="76"
@@ -35,10 +38,10 @@
         </div>
         <div>
           <p class="text-xl font-semibold leading-[150%] w-545-max:text-[1rem]">
-            Jonathon Smith
+            {{item.name}}
           </p>
           <p class="text-[#898886] w-545-max:text-[14px]">
-            Account 123456789456
+            Account {{item.account}}
           </p>
         </div>
       </div>
@@ -65,9 +68,9 @@
       <input type="text" id="send" formControlName="send"
         class="py-4 ps-10 pe-36 outline-none border-[#B0AFAE] border-[1px] rounded-lg w-full w-545-max:pt-[.5rem] w-545-max:pb-[.5rem] w-545-max:ps-[1rem]" />
       <div
-        class="bg-[#E3E2E2] from-current-list absolute w-36 right-0 top-0 bottom-0 flex justify-center items-center gap-2 rounded-tr-lg rounded-br-lg cursor-pointer w-545-max:w-[7rem]"
+        class="bg-[#E3E2E2] from-currency-list absolute w-36 right-0 top-0 bottom-0 flex justify-center items-center gap-2 rounded-tr-lg rounded-br-lg cursor-pointer w-545-max:w-[7rem]"
         (click)="handleClickFrom()">
-        <img class="w-4 h-4 rounded-full" src="{{ urlImgFrom }}" alt="" /><span>{{ currentFrom }}</span><svg width="24"
+        <img class="w-4 h-4 rounded-full" src="{{ urlImgFrom }}" alt="" /><span>{{ currencyFrom }}</span><svg width="24"
           height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 13.06L16.933 8.12001L18.3509 9.52001L12 15.88L5.64908 9.52001L7.06705 8.12001L12 13.06Z"
             fill="#24221E" />
@@ -105,10 +108,10 @@
         class="py-4 ps-10 pe-36 outline-none border-[#B0AFAE] border-[1px] rounded-lg w-full w-545-max:pt-[.5rem] w-545-max:pb-[.5rem] w-545-max:ps-[1rem]" />
 
       <div
-        class="bg-[#E3E2E2] to-current-list absolute w-36 right-0 top-0 bottom-0 flex justify-center items-center gap-2 rounded-tr-lg rounded-br-lg cursor-pointer w-545-max:w-[7rem]"
+        class="bg-[#E3E2E2] to-currency-list absolute w-36 right-0 top-0 bottom-0 flex justify-center items-center gap-2 rounded-tr-lg rounded-br-lg cursor-pointer w-545-max:w-[7rem]"
         (click)="handleClickTo()">
         <img class="w-4 h-4 rounded-full" src="{{ urlImgTo }}" alt="" /><span>{{
-          currentTo
+          currencyTo
           }}</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 13.06L16.933 8.12001L18.3509 9.52001L12 15.88L5.64908 9.52001L7.06705 8.12001L12 13.06Z"
             fill="#24221E" />
