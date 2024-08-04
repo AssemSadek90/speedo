@@ -2,12 +2,15 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { eachYearOfInterval, eachDayOfInterval, endOfYear, startOfYear, getDaysInMonth } from 'date-fns';
+import { eachYearOfInterval, getDaysInMonth } from 'date-fns';
+import { RouterLink } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
+import { LoginDropdownComponent } from '../login-dropdown/login-dropdown.component';
+
 @Component({
   selector: 'nav-login-comp',
   standalone: true,
-  imports: [CommonModule, FormsModule,ReactiveFormsModule, NgClass],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule, NgClass, RouterLink, LoginDropdownComponent],
   templateUrl: './nav-login-comp.component.html',
   styleUrl: './nav-login-comp.component.scss'
 })
@@ -70,6 +73,9 @@ export class NavLoginCompComponent {
       console.error('Login failed', error);
       this.tokenAvailable = false;
     }
+  }
+  handleLogout() {
+    this.tokenAvailable = false;
   }
 
   isLoginModalHidden: boolean = true;
