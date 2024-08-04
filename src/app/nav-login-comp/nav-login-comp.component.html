@@ -219,8 +219,6 @@
   </svg>
 </div>
 
-<!-- <div *ngIf="tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
-  <div class="">
-    <button>hello</button>
-  </div>
-</div> -->
+<div *ngIf="tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
+  <login-dropdown (loggedOut)="handleLogout()"></login-dropdown>
+</div>
