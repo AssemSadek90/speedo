@@ -6,6 +6,8 @@ import { eachYearOfInterval, getDaysInMonth } from 'date-fns';
 import { RouterLink } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
 import { LoginDropdownComponent } from '../login-dropdown/login-dropdown.component';
+import { RegisterModalService } from '../../shared/services/register-modal.service';
+import { RegisterServiceService } from '../../shared/services/register-service.service';
 
 @Component({
   selector: 'nav-login-comp',
@@ -39,9 +41,31 @@ export class NavLoginCompComponent {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor(private loginService: LoginService) {
+   phoneNumber = "+1234567890";
+   address= "123 Main St";
+   nationalIdNumber= "12345678901234";
+   gender= "MALE";
+   
+  registerForm = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    nationality: new FormControl('', [Validators.required]),
+    day: new FormControl('', [Validators.required]),
+    month: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  });
+
+
+  constructor(private loginService: LoginService,private registerService: RegisterServiceService, private registerModalService: RegisterModalService) {
     this.years = eachYearOfInterval({ start: new Date().setFullYear(this.selectedYear - 100), end: new Date() }).map(date => date.getFullYear());
     this.updateDays();
+  }
+  ngOnInit() {
+    this.registerModalService.registerModalVisible$.subscribe((isVisible) => {
+      this.isRegisterModalHidden = !isVisible;
+    });
   }
 
   updateDays() {
@@ -49,14 +73,20 @@ export class NavLoginCompComponent {
     this.days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   }
 
+  onDayChange(day: number) {
+    this.registerForm.controls.day.setValue(String(day));
+  }
+
   onMonthChange(month: number) {
     this.selectedMonth = month;
     this.updateDays();
+    this.registerForm.controls.month.setValue(String(this.selectedMonth));
   }
 
   onYearChange(year: number) {
     this.selectedYear = year;
     this.updateDays();
+    this.registerForm.controls.year.setValue(String(this.selectedYear));
   }
 
   tokenAvailable: boolean = this.loginService.id !== undefined;
@@ -74,6 +104,21 @@ export class NavLoginCompComponent {
       this.tokenAvailable = false;
     }
   }
+
+  async onSubmitRegister() {
+    if (this.registerForm.invalid) return;
+    let dateOfBirth = `${this.registerForm.get('year')?.value}-${this.registerForm.get('month')?.value}-${this.registerForm.get('day')?.value}`;
+    try{
+      await this.registerService.registerRequest(this.registerForm.get('firstName')?.value!, this.registerForm.get('lastName')?.value!, this.registerForm.get('email')?.value!,"01064065523","123 Main St", this.registerForm.get('nationality')?.value!,"12345678901234","MALE",dateOfBirth,  this.registerForm.get('password')?.value!);
+      this.tokenAvailable = this.registerService.id !== undefined;
+      this.registerModalService.closeRegisterModal();
+    }catch(error){
+      console.error('Register failed', error);
+      this.tokenAvailable = false;
+    }
+  }
+
+
   handleLogout() {
     this.tokenAvailable = false;
   }
@@ -84,6 +129,28 @@ export class NavLoginCompComponent {
     this.isLoginModalHidden = !this.isLoginModalHidden;
   }
   handleOpenRegisterModal() {
-    this.isRegisterModalHidden = !this.isRegisterModalHidden;
+    this.registerModalService.openRegisterModal()
+  }
+  handleCloseRegisterModal() {
+    this.registerModalService.closeRegisterModal()
+  }
+
+  handleCreateAccount() {
+    this.handleOpenLoginModal();
+    this.registerModalService.openRegisterModal();
+  }
+  handleLoginFromRegister() {
+    this.registerModalService.closeRegisterModal();
+    this.handleOpenLoginModal();
+  }
+
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
+  handleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+  handleShowConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }

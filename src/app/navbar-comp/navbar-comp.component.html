@@ -2,16 +2,16 @@
   class="h-24 flex justify-center items-center w-485-max:justify-between relative"
 >
   <div
-    class="text-[32px] pl-[2.5%] w-full min-w-[30%] w-910-max:text-[24px] w-485-max:min-w-auto w-485-max:text-[1rem]"
+    class="text-[32px] pl-[2.5%] min-w-fit w-485-max:min-w-fit w-910-max:text-[24px] w-485-max:min-w-auto w-485-max:text-[1rem]"
   >
     Speedo Transfer
   </div>
   <div
-    class="min-w-[60%] flex justify-end justify-self-stretch w-485-max:min-w-0"
+    class="min-w-[60%] flex justify-end items-center justify-self-stretch space-x-4 w-485-max:min-w-0 w-485-max:w-[50%]"
   >
     <div
       [ngClass]="{ 'inline-block': toggleList, hidden: !toggleList }"
-      class="flex items-center gap-6 w-780-max:absolute w-780-max:top-[100%] w-780-max:w-full w-780-max:flex-col w-780-max:z-40 w-780-max:bg-white"
+      class="flex items-center gap-6 w-780-max:absolute w-780-max:top-[100%] w-780-max:w-full w-780-max:flex-col w-780-max:items-center w-780-max:z-40 w-780-max:bg-white"
     >
       <a
         class="w-910-max:text-[14px] w-780-max:border-b-[1px] w-780-max:border-b-[black]"
@@ -36,7 +36,7 @@
 
     <svg
       (click)="listDropdown()"
-      class="h-[24px] w-[24px] hidden w-780-max:inline-block fill-[#871E35]"
+      class="h-[24px] w-[24px] hidden w-485-max:h-[16px] w-485-max:w-[16px] w-780-max:inline-block fill-[#871E35]"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 448 512"
     >
