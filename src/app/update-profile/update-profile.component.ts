@@ -1,12 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ProfileInfoService } from '../../shared/services/profile-info.service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.scss'
 })
-export class UpdateProfileComponent {
+export class UpdateProfileComponent implements OnInit, OnDestroy {
+  firstName!: string;
+  lastName!: string;
+  email!: string;
+  phoneNumber!: string;
+  messageUpdate!: string;
 
+  getProfileInfoSubscription!: Subscription;
+  constructor(private profileService: ProfileInfoService){}
+  ngOnInit(): void {
+      this.getProfileInfoSubscription = this.profileService.getProfileInfo().subscribe((res: any) => {
+        this.firstName = res.firstName;
+        this.lastName = res.lastName;
+        this.email = res.email;
+        this.phoneNumber = res.phoneNumber;
+      })
+  }
+  handleSubmit(form: NgForm) {
+    if (!form.valid) {
+      this.messageUpdate = "Please fill all fields correctly";
+      return;
+    }
+    this.profileService.updateProfileInfo(form.value.firstName, form.value.lastName, form.value.email, form.value.phoneNumber, 200).subscribe(res => {
+      if (res.status === 200) {
+        this.messageUpdate = "The profile was successfully updated";
+      }else {
+        this.messageUpdate = "There is an error updating the profile"
+      }
+    })
+  }
+  ngOnDestroy(): void {
+      if (this.getProfileInfoSubscription) {
+        this.getProfileInfoSubscription.unsubscribe();
+      }
+  }
 }

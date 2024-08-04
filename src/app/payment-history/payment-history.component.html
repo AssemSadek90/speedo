@@ -1,14 +1,14 @@
 <section class="container mx-auto px-8 py-1 w-625-max:p-[1rem]">
     <h4 class="text-2xl">Payment History</h4>
     <br><br>
-    <div  *ngFor="let item of items; let i = index" class="w-545-max:w-[225px]">
+    <div  *ngFor="let item of listHistory; let i = index" class="w-545-max:w-[225px]">
       <div class="accNUM flex justify-between p-[17px_50px_5px] w-780-max:p-[.5rem]">
         <div class="flex">
           <label class="text-lg font-medium  w-780-max:text-[10px]">Account Number:</label>
-          <p #textToCopy [attr.data-index]="i" class="font-medium w-780-max:text-[10px] w-780-max:flex w-780-max:items-center">{{item.accountNumber}}</p>
+          <p #textToCopy [attr.data-index]="i" class="font-medium w-780-max:text-[10px] w-780-max:flex w-780-max:items-center">{{item.accountNum}}</p>
         </div>
         <button (click)="copyText(i)">
-          <img [src]="copyIcons[i]" alt="Copy Icon">
+          <img #imgToCopy src='/assets/icons/copy.svg' alt="Copy Icon">
         </button>
       </div>
   
@@ -20,9 +20,9 @@
         </div>
         <div>
             <div class="flex w-780-max:justify-end">
-          <label class="font-bold mb-2 w-780-max:text-[10px]">Total Price:</label><p class="font-bold mb-2 w-780-max:text-[10px]">1000<span>USD</span></p>
+          <label class="font-bold mb-2 w-780-max:text-[10px]">Total Price:</label><p class="font-bold mb-2 w-780-max:text-[10px]">{{item.totalPrice}}<span>USD</span></p>
         </div>
-          <p class="text-gray-600 mb-2 pl-10 w-780-max:text-[12px]">{{item.RecipientName}}</p>
+          <p class="text-gray-600 mb-2 pl-10 w-780-max:text-[12px]">{{item.name}}</p>
         </div>
       </div>
     </div>

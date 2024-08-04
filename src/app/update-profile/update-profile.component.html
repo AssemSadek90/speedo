@@ -1,19 +1,24 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<form #myForm="ngForm" (ngSubmit)="handleSubmit(myForm)" >
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
         <label for="username" class="block text-gray-700 text-base  mb-2 w-780-max:text-[14px]">User name</label>
-        <input type="text" id="username" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" value="Jonathon"  >
+        <input type="text" id="username" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" name="firstName" [(ngModel)]="firstName"  required>
     </div>
     <div>
         <label for="lastname" class="block text-gray-700 text-base  mb-2 w-780-max:text-[14px]">Last name</label>
-        <input type="text" id="lastname" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" value="Smith"  >
+        <input type="text" id="lastname" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" name="lastName" [(ngModel)]="lastName" required  >
     </div>
     <div>
         <label for="phone" class="block text-gray-700 text-base mb-2 w-780-max:text-[14px]">Phone</label>
-        <input type="text" id="phone" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" value="+880125412624"  >
+        <input type="text" id="phone" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" name="phoneNumber" [(ngModel)]="phoneNumber" required  >
     </div>
     <div>
         <label for="email" class="block text-gray-700 text-base  mb-2 w-780-max:text-[14px]">Email</label>
-        <input type="email" id="email" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" value="jhonathonsmith@gmail.com"  >
+        <input type="email" id="email" class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-780-max:text-[14px] w-780-max:p-[.5rem]" name="email" [(ngModel)]="email"  required>
     </div>
 </div>
-<button class=" text-base text-white mt-6 p-[16px_32px_16px_32px] w-780-max:text-[14px] w-780-max:p-[.5rem]" type="button ">Update Profile</button>
+<button class=" text-base text-white mt-6 p-[16px_32px_16px_32px] w-780-max:text-[14px] w-780-max:p-[.5rem]" type="submit ">Update Profile</button>
+<div class="text-[#871E35] my-4" *ngIf="myForm.submitted">
+      {{messageUpdate}}
+    </div>
+</form>

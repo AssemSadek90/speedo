@@ -15,5 +15,11 @@ export const environment = {
     },
     transferMoney: {
         endpoint: '/transferMoney',
+    },
+    paymentHistory: {
+        endpoint: '/paymentHistory',
+    },
+    changePassword: {
+        endpoint: '/changePassword',
     }
 };

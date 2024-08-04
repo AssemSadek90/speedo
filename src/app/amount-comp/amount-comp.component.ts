@@ -70,18 +70,18 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   }
   }
   ngOnInit(): void {
-    // this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
-    //   next: (data) => {
-    //     const rate = data.conversion_rates[this.currencyTo];
-    //     if (rate) {
-    //       this.exchangeRate = rate;
-    //       this.USDEqualToEGP = rate;
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error('Error fetching exchange rate:', err);
-    //   }
-    // });
+    this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
+      next: (data) => {
+        const rate = data.conversion_rates[this.currencyTo];
+        if (rate) {
+          this.exchangeRate = rate;
+          this.USDEqualToEGP = rate;
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching exchange rate:', err);
+      }
+    });
     this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
         this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
@@ -158,10 +158,10 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     this.isModalHidden = true;
    }
   onSubmit(form: FormGroup): void {
-    // if (form.invalid) {
-    //   this.isSubmitted = true;
-    //   return;
-    // };
+    if (form.invalid) {
+      this.isSubmitted = true;
+      return;
+    };
     this.isSubmitted = false;
     this.globalService.setTransferStatusVariable("confirmation");
     this.router.navigate(["/transfer", "confirmation"], { queryParams: { data: JSON.stringify(form.value), currencyFrom: this.currencyFrom, currencyTo: this.currencyTo } });

@@ -1,7 +1,7 @@
 <section class="container mx-auto px-8 py-1 w-780-max:px-[1rem]">
   <h4 class="text-2xl w-780-max:text-[5px]">My Profile</h4>
   <div class="mt-8 flex w-780-max:flex-row">
-    <p class="text-8xl font-bold text-black flex items-center w-1190-max:text-[3rem] w-780-max:text-[1rem]">10000<span>$</span></p>
+    <p class="text-8xl font-bold text-black flex items-center w-1190-max:text-[3rem] w-780-max:text-[1rem]">{{profileBalance}}<span>$</span></p>
     <h3 class="text-4xl font-extrabold pt-8 w-1190-max:pt-0 w-780-max:text-[20px] w-780-max:text-[15px]">Balance</h3>
   </div>
   <br><br>
@@ -21,21 +21,21 @@
       </div>
     </div>
     <div class="data flex flex-col gap-6 ">
-      <div *ngFor="let profile of profiles">
+      <div>
         <div class="flex items-center">
-          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profile.name }}</p>
+          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profileName }}</p>
         </div>
         <br>
         <div class="flex items-center">
-          <p class="text-gray-900 text-base w-780-max:text-[10px] ">{{ profile.email }}</p>
+          <p class="text-gray-900 text-base w-780-max:text-[10px] ">{{ profileEmail }}</p>
         </div>
         <br>
         <div class="flex items-center">
-          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profile.phone }}</p>
+          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profilePhone }}</p>
         </div>
         <br>
         <div class="flex items-center">
-          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profile.gender }}</p>
+          <p class="text-gray-900 w-780-max:text-[10px] ">{{ profileGender }}</p>
         </div>
       </div>
     </div>

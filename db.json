@@ -23,17 +23,19 @@
       "name": "eslam adel",
       "account": 123456789456,
       "status": 200
+    },
+    {
+      "id": "abad",
+      "name": "eslam adel",
+      "account": 123456789456,
+      "status": 200
     }
   ],
   "profileInfo": {
-    "id": 1,
     "firstName": "Jonathon",
     "lastName": "Smith",
     "email": "john.smith@example.com",
-    "phoneNumber": "555-555-5555",
-    "gender": "male",
-    "account": 123456789456,
-    "balance": 123
+    "phoneNumber": "555-555-5555"
   },
   "transferMoney": [
     {
@@ -46,7 +48,8 @@
       "fromAccNum": "123456789",
       "toAccNum": "987654321",
       "fees": 50,
-      "status": 200
+      "status": 200,
+      "id": "8fcd"
     },
     {
       "id": "fe39",
@@ -73,6 +76,76 @@
       "toAccNum": "123456789456",
       "fees": 0,
       "status": 200
+    },
+    {
+      "id": "f930",
+      "amountToSend": 0,
+      "amountToRecieve": 0,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "",
+      "fromAccNum": 123456789456,
+      "toAccNum": "",
+      "fees": 0,
+      "status": 200
+    },
+    {
+      "id": "bb34",
+      "amountToSend": 1000,
+      "amountToRecieve": 48680.799999999996,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": 123456789456,
+      "fees": 18.970000000000002,
+      "status": 200
+    },
+    {
+      "id": "02ed",
+      "amountToSend": 1000,
+      "amountToRecieve": 48680.799999999996,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": 123456789456,
+      "fees": 18.970000000000002,
+      "status": 200
     }
-  ]
+  ],
+  "paymentHistory": [
+    {
+      "accountNum": "A123456789",
+      "name": "Alice Johnson",
+      "totalPrice": 250.75,
+      "id": "8aed"
+    },
+    {
+      "accountNum": "B987654321",
+      "name": "Bob Smith",
+      "totalPrice": 142.3,
+      "id": "3dfa"
+    },
+    {
+      "accountNum": "C555555555",
+      "name": "Carol Davis",
+      "totalPrice": 305.6,
+      "id": "9796"
+    },
+    {
+      "accountNum": "D666666666",
+      "name": "David Lee",
+      "totalPrice": 78.9,
+      "id": "08d6"
+    }
+  ],
+  "changePassword": {
+    "oldPassword": "fwewef",
+    "newPassword": "fwefwefewf",
+    "status": 200
+  }
 }

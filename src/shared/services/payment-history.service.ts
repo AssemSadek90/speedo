@@ -1,15 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Observable, firstValueFrom } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileInfoService {
+export class PaymentHistoryService {
+
   apiUrl = environment.apiUrl;
-  apiEndPoint = environment.profileInfo.endpoint;
+  apiEndPoint = environment.paymentHistory.endpoint;
   headers!: HttpHeaders;
  
   constructor(private httpClient: HttpClient, @Inject(DOCUMENT) document: Document) {
@@ -23,10 +24,7 @@ export class ProfileInfoService {
   }
   }
   
-  getProfileInfo(): Observable<any>  {
+  getPaymentHistory(): Observable<any[]>  {
     return this.httpClient.get<any>(`${this.apiUrl}${this.apiEndPoint}`)
-  }
-  updateProfileInfo(firstName:string, lastName:string, email: string, phoneNumber: string, status: number): Observable<any> {
-    return this.httpClient.put<any>(`${this.apiUrl}${this.apiEndPoint}`, {firstName, lastName, email, phoneNumber})
   }
 }
