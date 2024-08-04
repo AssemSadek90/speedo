@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center relative z-10">
       <div>
         <h2 class="text-5xl font-semibold leading-[150%] w-1190-max:text-4xl w-820-max:text-[2rem] w-625-max:text-[1.8rem] w-485-max:text-[1.6rem] w-380-max:text-[1.4rem]">My Account</h2>
-        <p class="w-1190-max:text-[14px] w-485-max:text-[12px]">Home &bull; My Account</p>
+        <div class="w-1190-max:text-[14px] w-485-max:text-[12px]"><a  routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"  class=" mr-2">Home</a> <a routerLink="/myaccount" routerLinkActive="active">&bull; My Account </a></div>
       </div>
       <img src="assets/Other/Breadcrumb-vector.svg" alt="Illustration of trading steps" class="w-1190-max:w-[200px] w-820-max:w-[150px] w-625-max:w-[120px] w-485-max:w-[100px] w-380-max:w-[80px]">
     </div>
@@ -18,6 +18,7 @@
             <li class="mb-0 py-2 w-625-max:py-[0px] w-780-max:py-[0px]">
               <a
                 routerLink="/myaccount/myprofile"
+                
                 class="block py-4 px-4  font-medium w-625-max:text-[8px] w-625-max:px-[10px] w-780-max:text-[8px] w-780-max:px-[px]"
                 >My Profile</a
               >
@@ -25,6 +26,7 @@
             <li class="mb-0 py-2 w-625-max:py-[0px]">
               <a
                 routerLink="/myaccount/paymenthistory"
+               
                 class="block py-4 px-4 font-medium w-625-max:text-[8px] w-625-max:px-[10px] w-780-max:text-[8px] w-780-max:px-[10px]"
                 >Payment History</a
               >
@@ -32,6 +34,7 @@
             <li class="mb-0 py-2 w-625-max:py-[0px]">
               <a
                 routerLink="/myaccount/settings"
+              
                 class="block py-4 px-4 font-medium w-625-max:text-[10px] w-625-max:px-[10px] w-780-max:text-[8px] w-780-max:px-[10px]"
                 >Settings</a
               >
@@ -39,6 +42,7 @@
             <li class="mb-0 py-2 w-625-max:py-[0px] ">
               <a
                 routerLink="/myaccount/settings/changepassword"
+               
                 class="block py-4 px-4 font-medium w-625-max:text-[8px] w-625-max:px-[10px] w-780-max:text-[8px] w-780-max:px-[10px]"
                 >Change Password</a
               >

@@ -13,8 +13,8 @@ export class PaymentHistoryComponent {
   copyIcons: string[] = ['/assets/icons/copy.svg', '/assets/icons/copy.svg']; 
 
   items = [
-    { accountNumber: '6785 4987 6543',RecipientName:'Jonathon Smith' },
-    { accountNumber: '1234 5678 9012',RecipientName:'Jonathon Smith' }
+    { accountNumber: '6785 4987 6543',RecipientName:'Jonathon Smith',totalPrice:1000},
+    { accountNumber: '1234 5678 9012',RecipientName:'Jonathon Smith',totalPrice:1000 }
   ];
 
   copyText(index: number): void {

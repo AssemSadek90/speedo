@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './my-profile.component.scss'
 })
 export class MyProfileComponent {
+  Balances = [
+    { name: 'Account 1', balance: 1000 },
+  ]
   profiles = [
     {
       name: 'Jonathon Smith',
