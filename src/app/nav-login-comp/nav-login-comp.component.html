@@ -29,7 +29,7 @@
     <form
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
-      class="flex flex-col mx-auto w-[40%] p-8 space-y-4"
+      class="flex flex-col mx-auto lg:w-[40%] md:w-[60%] sm:w-[80%] p-8 space-y-4 overflow-auto"
     >
       <span class="text-4xl">Login here</span>
       <span class="text-[#565552]">welcome back. Login to your account</span>
@@ -97,7 +97,9 @@
         tempor incididunt ut labore.</span
       >
     </div>
-    <form class="grid grid-cols-2 gap-x-[5%] w-[70%] mx-auto overflow-y-scroll">
+    <form
+      class="grid lg:grid-cols-2 md:grid-col-1 sm:grid-col-1 px-4 gap-x-[5%] lg:w-[70%] md:w-[90%] sm:w-[95%] mx-auto overflow-y-auto"
+    >
       <div class="flex flex-col space-y-4">
         <label for="username">User Name</label>
         <input
@@ -181,7 +183,7 @@
         />
       </div>
       <button
-        class="prim-button col-span-2 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
+        class="prim-button lg:col-span-2 md:col-span-1 sm:col-span-1 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
       >
         Create An Account
       </button>
@@ -208,15 +210,17 @@
     </button>
   </div>
 
-  <svg
-    class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
-  >
-    <path
-      d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
-    />
-  </svg>
+  <span (click)="handleOpenLoginModal()" class="w-780-max:pr-4 w-485-max:pr-4">
+    <svg
+      class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
+      />
+    </svg>
+  </span>
 </div>
 
 <div *ngIf="tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">

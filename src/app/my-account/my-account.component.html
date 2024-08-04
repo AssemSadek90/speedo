@@ -21,31 +21,39 @@
         <!-- Sidebar -->
         <aside class="w-64 h-screen p-0">
           <ul>
-            <li class="mb-0 py-2 ">
+            <li class="mb-0">
               <a
                 routerLink="/myaccount/myprofile"
-                class="block py-4 px-4  font-medium"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block py-6 px-4 font-medium"
                 >My Profile</a
               >
             </li>
-            <li class="mb-0 py-2">
+            <li class="mb-0">
               <a
                 routerLink="/myaccount/paymenthistory"
-                class="block py-4 px-4 font-medium"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block py-6 px-4 font-medium"
                 >Payment History</a
               >
             </li>
-            <li class="mb-0 py-2">
+            <li class="mb-0">
               <a
-                routerLink="/myaccount/settings"
-                class="block py-4 px-4 font-medium"
+                routerLink="/myaccount/settings/updateProfile"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block py-6 px-4 font-medium"
                 >Settings</a
               >
             </li>
-            <li class="mb-0 py-2">
+            <li class="mb-0">
               <a
                 routerLink="/myaccount/settings/changepassword"
-                class="block py-4 px-4 font-medium"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block py-6 px-4 font-medium"
                 >Change Password</a
               >
             </li>
