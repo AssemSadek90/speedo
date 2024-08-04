@@ -1,0 +1,78 @@
+{
+  "favourites": [
+    {
+      "itemId": 1,
+      "name": "Jonathon Smith",
+      "account": 123456789456,
+      "id": "78cf"
+    },
+    {
+      "itemId": 2,
+      "name": "Jonathon Smith",
+      "account": 123456789456,
+      "id": "2a23"
+    },
+    {
+      "itemId": 3,
+      "name": "Jonathon Smith",
+      "account": 123456789456,
+      "id": "e7f3"
+    },
+    {
+      "id": "01f7",
+      "name": "eslam adel",
+      "account": 123456789456,
+      "status": 200
+    }
+  ],
+  "profileInfo": {
+    "id": 1,
+    "firstName": "Jonathon",
+    "lastName": "Smith",
+    "email": "john.smith@example.com",
+    "phoneNumber": "555-555-5555",
+    "gender": "male",
+    "account": 123456789456,
+    "balance": 123
+  },
+  "transferMoney": [
+    {
+      "amountToSend": 1000,
+      "amountToRecieve": 950,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EUR",
+      "fromName": "John Doe",
+      "toName": "Jane Smith",
+      "fromAccNum": "123456789",
+      "toAccNum": "987654321",
+      "fees": 50,
+      "status": 200
+    },
+    {
+      "id": "fe39",
+      "amountToSend": 0,
+      "amountToRecieve": 0,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": "123456789456",
+      "fees": 0,
+      "status": 200
+    },
+    {
+      "id": "dd7b",
+      "amountToSend": 0,
+      "amountToRecieve": 0,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": "123456789456",
+      "fees": 0,
+      "status": 200
+    }
+  ]
+}

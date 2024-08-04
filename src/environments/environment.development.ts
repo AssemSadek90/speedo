@@ -7,4 +7,13 @@ export const environment = {
     register: {
         endpoint: '/register',
     },
+    favorites: {
+        endpoint: '/favourites' ,
+    },
+    profileInfo: {
+        endpoint: '/profileInfo',
+    },
+    transferMoney: {
+        endpoint: '/transferMoney',
+    }
 };
