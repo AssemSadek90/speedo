@@ -1,63 +1,126 @@
 {
   "login": [
     {
-      "id": "b510",
-      "email": "admin@radiology.com",
-      "password": "123",
+      "id": "0d65",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "2586286",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     },
     {
-      "id": "3dae",
-      "email": "admin@radiology.com",
-      "password": "123",
+      "id": "1905",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "82628286",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     },
     {
-      "id": "4c6c",
-      "email": "admin@radiology.com",
-      "password": "123",
+      "id": "6a36",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "27527525",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     },
     {
-      "id": "6e72",
-      "email": "admin@radiology.com",
-      "password": "123",
+      "id": "313e",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "52752752",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     },
     {
-      "id": "b351",
-      "email": "admin@radiology.com",
-      "password": "123",
+      "id": "c701",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "17527526",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     },
     {
-      "id": "b29d",
-      "email": "admin@radiology.com",
-      "password": "123",
+      "id": "c03f",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "15245245",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     },
     {
-      "id": "8df6",
-      "email": "abdelhamid.ssen@gmail.com",
-      "password": "123",
+      "id": "ef4c",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "175275257",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "8b8a",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "165184894",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "c2ab",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "12151515",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "c956",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "124532453",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "b499",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "12346879",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "7ac8",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "5757857857",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "0dd5",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "12345678",
       "token": "helloworld",
       "firstName": "john",
       "lastName": "doe"
     }
   ],
-  "register": [],
+  "register": [
+    {
+      "id": "719a",
+      "firstName": "eslam",
+      "lastName": "adel",
+      "email": "eslamadel52@gmail.com",
+      "phoneNumber": "01064065523",
+      "address": "123 Main St",
+      "nationality": "Egyptian",
+      "nationalIdNumber": "12345678901234",
+      "gender": "MALE",
+      "dateOfBirth": "2002-12-8",
+      "password": "123",
+      "token": "helloworld"
+    }
+  ],
   "favourites": [
     {
       "itemId": 1,
@@ -85,6 +148,12 @@
     },
     {
       "id": "abad",
+      "name": "eslam adel",
+      "account": 123456789456,
+      "status": 200
+    },
+    {
+      "id": "713f",
       "name": "eslam adel",
       "account": 123456789456,
       "status": 200
@@ -185,16 +254,16 @@
       "status": 200
     },
     {
-      "id": "16c4",
-      "amountToSend": 48733,
-      "amountToRecieve": 1000.00116,
-      "currencyToSend": "EGP",
-      "currencyToRecieve": "USD",
+      "id": "cb4e",
+      "amountToSend": 100,
+      "amountToRecieve": 4868.08,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
       "fromName": "John Doe",
       "toName": "eslam adel",
       "fromAccNum": 1234567890,
       "toAccNum": 123456789456,
-      "fees": 924.46501,
+      "fees": 1.897,
       "status": 200
     }
   ],

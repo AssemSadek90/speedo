@@ -1,41 +1,22 @@
-import { DOCUMENT, NgFor, NgIf } from '@angular/common';
-import { Component, HostListener, Inject, OnDestroy, OnInit, } from '@angular/core';
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { Component, HostListener, OnDestroy, OnInit, } from '@angular/core';
 import { GlobalService } from '../../shared/services/global.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
 import { CurrencyService } from '../currency-service.service';
 import { Subscription } from 'rxjs';
 import { FavouriteService } from '../../shared/services/favourite.service';
 import { ProfileInfoService } from '../../shared/services/profile-info.service';
+import { ValidatorsService } from '../../shared/services/validators/validators.service';
 
-export function greaterThanZeroValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    return value > 0 ? null : { greaterThanZero: true };
-  };
-}
-export function twelveDigitValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const value = control.value;
-    if (value && !/^\d{12}$/.test(value)) {
-      return { 'twelveDigit': { value: control.value } };
-    }
-    return null;
-  };
-}
-export function digitsOnlyValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const isValid = /^\d*$/.test(control.value); 
-    return isValid ? null : { 'digitsOnly': { value: control.value } };
-  };
-}
+
 @Component({
   selector: 'app-amount-comp',
   standalone: true,
   imports: [NgIf, ReactiveFormsModule, NgFor],
   templateUrl: './amount-comp.component.html',
   styleUrl: './amount-comp.component.scss',
-
+  providers: [DecimalPipe]
 })
 export class AmountCompComponent implements OnDestroy, OnInit{
   currencyFrom: string = 'USD';
@@ -62,17 +43,12 @@ export class AmountCompComponent implements OnDestroy, OnInit{
 
 
   transferFrom: FormGroup = new FormGroup({
-    send: new FormControl(0, [Validators.required, greaterThanZeroValidator()]),
-    get: new FormControl(0, [Validators.required, greaterThanZeroValidator()]),
+    send: new FormControl(0, [Validators.required, this.validatorsService.greaterThanZeroValidator()]),
+    get: new FormControl(0, [Validators.required, this.validatorsService.greaterThanZeroValidator()]),
     recipientName: new FormControl('', [Validators.required]),
-    recipientAccount: new FormControl('', [Validators.required, digitsOnlyValidator()]),
+    recipientAccount: new FormControl('', [Validators.required, this.validatorsService.digitsOnlyValidator(), this.validatorsService.minDigitsValidator(8)]),
   })
-  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, @Inject(DOCUMENT) private document: Document, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService) {
-    const sessionStorage = document.defaultView?.sessionStorage;
-    if(sessionStorage) {
-      sessionStorage.setItem("accessToken", "HelloWorld");
-  }
-  }
+  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService, private decimalPipe: DecimalPipe, private validatorsService :ValidatorsService) {}
   ngOnInit(): void {
     this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
       next: (data) => {
@@ -88,13 +64,13 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     });
     this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
-        this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
+        this.transferFrom.get("get")?.setValue(parseFloat(this.decimalPipe.transform(data * this.exchangeRate, '1.0-2')!.replace(/,/g, '')), {emitEvent: false});
       }
       
     })
     this.transferSubscription2 = this.transferFrom.get("get")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
-        this.transferFrom.get("send")?.setValue(data / this.exchangeRate, {emitEvent: false});
+        this.transferFrom.get("send")?.setValue(parseFloat(this.decimalPipe.transform(data / this.exchangeRate, '1.0-2')!.replace(/,/g, '')), {emitEvent: false});
       }
       
     })

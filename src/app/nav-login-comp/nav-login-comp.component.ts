@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
+import { CommonModule, NgClass, isPlatformBrowser } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -95,6 +95,7 @@ export class NavLoginCompComponent {
       this.tokenAvailable = true;
   }
     }
+    
   }
 
   updateDays() {
