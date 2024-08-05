@@ -15,15 +15,15 @@ export class UpdataProfileInfoService {
  
   constructor(private httpClient: HttpClient, @Inject(DOCUMENT) document: Document) {
     const sessionStorage = document.defaultView?.sessionStorage;
+    
+  }
+  updateProfileInfo(firstName:string, lastName:string, email: string, phoneNumber: string): Observable<any> {
     if(sessionStorage) {
-
       this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("token")}}`
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
     });
   }
-  }
-  updateProfileInfo(firstName:string, lastName:string, email: string, phoneNumber: string, status: number): Observable<any> {
-    return this.httpClient.put<any>(`${this.apiUrl}${this.apiEndPoint}`, {firstName, lastName, email, phoneNumber, status})
+    return this.httpClient.put<any>(`${this.apiUrl}${this.apiEndPoint}`, {firstName, lastName, email, phoneNumber}, {headers: this.headers})
   }
 }

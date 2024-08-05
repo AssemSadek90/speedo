@@ -22,8 +22,8 @@ export class ChangePasswordComponent implements OnDestroy {
       this.changePasswordMessage = "Please fill all fields correctly";
       return;
     }
-    this.changePasswordSubscription = this.changePasswordService.updatePassword(form.value.oldPassword, form.value.newPassword, 200).subscribe(res => {
-      if (res.status === 200) {
+    this.changePasswordSubscription = this.changePasswordService.updatePassword(form.value.oldPassword, form.value.newPassword).subscribe(res => {
+      if (res.detail === "Password updated successfully") {
         this.changePasswordMessage = "Password updated successfully"
       }else {
         this.changePasswordMessage = "There was an error updating"

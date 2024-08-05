@@ -35,8 +35,8 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
       this.messageUpdate = "Please fill all fields correctly";
       return;
     }
-    this.updateProfileInfoSubscription = this.updataProfileInfoService.updateProfileInfo(form.value.firstName, form.value.lastName, form.value.email, form.value.phoneNumber, 200).subscribe(res => {
-      if (res.status === 200) {
+    this.updateProfileInfoSubscription = this.updataProfileInfoService.updateProfileInfo(form.value.firstName, form.value.lastName, form.value.email, form.value.phoneNumber).subscribe(res => {
+      if (res.firstName) {
         this.messageUpdate = "The profile was successfully updated";
       }else {
         this.messageUpdate = "There is an error updating the profile"

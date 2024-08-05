@@ -15,16 +15,16 @@ export class PaymentHistoryService {
  
   constructor(private httpClient: HttpClient, @Inject(DOCUMENT) document: Document) {
     const sessionStorage = document.defaultView?.sessionStorage;
-    if(sessionStorage) {
-
-      this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("token")}}`
-    });
-  }
+    
   }
   
   getPaymentHistory(): Observable<any[]>  {
-    return this.httpClient.get<any>(`${this.apiUrl}${this.apiEndPoint}`)
+    if(sessionStorage) {
+      this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+    });
+  }
+    return this.httpClient.get<any>(`${this.apiUrl}${this.apiEndPoint}`, {headers: this.headers})
   }
 }

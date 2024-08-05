@@ -1,4 +1,6 @@
-<section class="container mx-auto px-8 py-1 w-625-max:p-[1rem]">
+<section
+  class="container mx-auto px-8 py-1 w-625-max:p-[1rem] max-h-screen overflow-y-auto"
+>
   <h4 class="text-2xl">Payment History</h4>
   <br /><br />
   <div
@@ -17,7 +19,7 @@
           [attr.data-index]="i"
           class="font-medium w-780-max:text-[10px] w-780-max:flex w-780-max:items-center"
         >
-          {{ item.accountNum }}
+          {{ item.recipientAccNum }}
         </p>
       </div>
       <button (click)="copyText(i)">
@@ -39,11 +41,11 @@
             >Total Price:</label
           >
           <p class="font-bold mb-2 w-780-max:text-[10px]">
-            {{ item.totalPrice }}<span>USD</span>
+            {{ item.totalSent }}<span>USD</span>
           </p>
         </div>
         <p class="text-gray-600 mb-2 pl-10 w-780-max:text-[12px]">
-          {{ item.name }}
+          {{ item.recipientName }}
         </p>
       </div>
     </div>
