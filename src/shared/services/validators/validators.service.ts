@@ -39,4 +39,27 @@ export class ValidatorsService {
       return digitCount >= minDigits ? null : { minDigits: { value: control.value } };
     };
   }
+
+  strongPasswordValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value as string;
+    if (!value) {
+      return null;
+    }
+  
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasNumber = /\d/.test(value);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    const validLength = value.length >= 8;
+  
+    const isValid = hasUpperCase && hasLowerCase && hasNumber && hasSymbol && validLength;
+  
+    if (!isValid) {
+      return {
+        strongPassword: 'Password must be at least 8 characters long and include upper and lower case letters, numbers, and symbols.'
+      };
+    }
+  
+    return null;
+  }
 }
