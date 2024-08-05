@@ -61,6 +61,9 @@
           >Create Account</span
         ></span
       >
+      <div class="text-[#871E35]" *ngIf="!isHiddenLoginMessage">
+        {{loginMessage}}
+      </div>
     </form>
     <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
       <span>©Speedo Transfer Payments Limited 2024</span>
@@ -297,6 +300,9 @@
     >
       Register Now
     </button>
+    <div class="text-[#871E35]" *ngIf="!isHiddenRegisterMessage">
+      {{registerMessage}}
+    </div>
   </div>
 
   <span (click)="handleOpenLoginModal()" class="w-780-max:pr-4 w-485-max:pr-4">

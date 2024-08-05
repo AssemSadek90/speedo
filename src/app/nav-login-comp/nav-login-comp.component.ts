@@ -19,6 +19,10 @@ import { RegisterServiceService } from '../../shared/services/register-service.s
 })
 export class NavLoginCompComponent {
   days: number[] = [];
+  loginMessage: string = '';
+  isHiddenLoginMessage: boolean = true;
+  registerMessage: string = '';
+  isHiddenRegisterMessage: boolean = true;
   months = [
     { value: 1, name: 'January' },
     { value: 2, name: 'February' },
@@ -136,28 +140,40 @@ export class NavLoginCompComponent {
   tokenAvailable: boolean = this.loginService.token !== undefined;
 
   async onSubmit() {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.isHiddenLoginMessage = false;
+      this.loginMessage = "invalid login"
+      return;
+    };
 
     try {
       const { email, password } = this.loginForm.value;
       await this.loginService.loginRequest(email!, password!);
       this.tokenAvailable = this.loginService.token !== undefined;
       this.isLoginModalHidden = true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login failed', error);
+      this.isHiddenLoginMessage = false;
+      this.loginMessage = error.error.message;
       this.tokenAvailable = false;
     }
   }
 
   async onSubmitRegister() {
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid) {
+      this.isHiddenRegisterMessage = false;
+      this.registerMessage = "invalid registration"
+      return;
+    };
     let dateOfBirth = `${this.registerForm.get('year')?.value}-${this.registerForm.get('month')?.value}-${this.registerForm.get('day')?.value}`;
     try{
       await this.registerService.registerRequest(this.registerForm.get('firstName')?.value!, this.registerForm.get('lastName')?.value!, this.registerForm.get('email')?.value!,"01064065523","123 Main St", this.registerForm.get('nationality')?.value!,12345678901234,"MALE",dateOfBirth,  this.registerForm.get('password')?.value!);
       this.tokenAvailable = this.registerService.id !== undefined;
       this.registerModalService.closeRegisterModal();
-    }catch(error){
+    }catch(error: any){
       console.error('Register failed', error);
+      this.isRegisterModalHidden = false;
+      this.registerMessage = error.error.message;
       this.tokenAvailable = false;
     }
   }
