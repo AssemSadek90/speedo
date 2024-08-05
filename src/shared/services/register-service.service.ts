@@ -23,7 +23,7 @@ export class RegisterServiceService {
   gender?: string;
   dateOfBirth?: string;
   constructor(private http: HttpClient) { }
-  async registerRequest(firstName: string|undefined, lastName:string|undefined, email: string|undefined,phoneNumber:string|undefined, address:string|undefined, nationality: string| undefined,nationalIdNumber:string|undefined, gender:string|undefined, dateOfBirth: string| undefined, password:string|undefined): Promise<any> {
+  async registerRequest(firstName: string|undefined, lastName:string|undefined, email: string|undefined,phoneNumber:string|undefined, address:string|undefined, nationality: string| undefined,nationalIdNumber:number |undefined, gender:string|undefined, dateOfBirth: string| undefined, password:string|undefined): Promise<any> {
     try {
       const response = await firstValueFrom(this.http.post<any>(`${this.apiUrl}${this.apiEndPoint}`, { firstName, lastName, email, phoneNumber,address, nationality,nationalIdNumber,gender, dateOfBirth, password, token: this.token }));
       this.id = response.id

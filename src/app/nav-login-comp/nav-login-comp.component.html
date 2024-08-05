@@ -218,6 +218,12 @@
             alt="👁️"
           />
         </div>
+        <div
+          *ngIf="registerForm.controls.password.errors?.['strongPassword'] as error"
+          class="text-[#871E35]"
+        >
+          {{ error }}
+        </div>
         <label for="confirm-password">Confirm Password</label>
         <div
           class="flex justify-between items-center border border-[#B0AFAE] rounded-[6.5px] pe-4"
@@ -255,12 +261,14 @@
       >
         Create An Account
       </button>
-      <span
-        >Already have an account?
-        <span class="prim mt-4" (click)="handleLoginFromRegister()"
-          >Login</span
-        ></span
+      <div
+        class="flex justify-center items-center mt-2 lg:col-span-2 md:col-span-1 sm:col-span-1"
       >
+        Already have an account?
+        <span class="prim text-center" (click)="handleLoginFromRegister()"
+          >Login</span
+        >
+      </div>
     </form>
     <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
       <span>©Speedo Transfer Payments Limited 2024</span>
