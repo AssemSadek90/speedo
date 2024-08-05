@@ -32,8 +32,8 @@
 </section>
 
 <div
-  *ngIf="!isExchangeRateOpen"
-  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+  *ngIf="isExchangeRateOpen"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20 hidden w-780-max:inline-block"
 >
   <div
     class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
