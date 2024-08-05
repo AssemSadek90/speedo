@@ -1,5 +1,5 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, NgClass, isPlatformBrowser } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { eachYearOfInterval, getDaysInMonth } from 'date-fns';
@@ -58,7 +58,7 @@ export class NavLoginCompComponent {
   });
 
 
-  constructor(private loginService: LoginService,private registerService: RegisterServiceService, private registerModalService: RegisterModalService) {
+  constructor(private loginService: LoginService,private registerService: RegisterServiceService, private registerModalService: RegisterModalService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.years = eachYearOfInterval({ start: new Date().setFullYear(this.selectedYear - 100), end: new Date() }).map(date => date.getFullYear());
     this.updateDays();
   }
@@ -66,6 +66,12 @@ export class NavLoginCompComponent {
     this.registerModalService.registerModalVisible$.subscribe((isVisible) => {
       this.isRegisterModalHidden = !isVisible;
     });
+    if (isPlatformBrowser(this.platformId)) {
+      if (sessionStorage.getItem('token') !== null) {
+      this.tokenAvailable = true;
+  }
+    }
+    
   }
 
   updateDays() {
