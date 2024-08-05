@@ -1,5 +1,5 @@
-import { DOCUMENT, NgFor, NgIf } from '@angular/common';
-import { Component, HostListener, Inject, OnDestroy, OnInit, } from '@angular/core';
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { Component, HostListener, OnDestroy, OnInit, } from '@angular/core';
 import { GlobalService } from '../../shared/services/global.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
@@ -7,7 +7,6 @@ import { CurrencyService } from '../currency-service.service';
 import { Subscription } from 'rxjs';
 import { FavouriteService } from '../../shared/services/favourite.service';
 import { ProfileInfoService } from '../../shared/services/profile-info.service';
-import { RegisterModalService } from '../../shared/services/register-modal.service';
 
 export function greaterThanZeroValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -36,7 +35,7 @@ export function digitsOnlyValidator(): ValidatorFn {
   imports: [NgIf, ReactiveFormsModule, NgFor],
   templateUrl: './amount-comp.component.html',
   styleUrl: './amount-comp.component.scss',
-
+  providers: [DecimalPipe]
 })
 export class AmountCompComponent implements OnDestroy, OnInit{
   currencyFrom: string = 'USD';
@@ -68,7 +67,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     recipientName: new FormControl('', [Validators.required]),
     recipientAccount: new FormControl('', [Validators.required, digitsOnlyValidator()]),
   })
-  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService) {}
+  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService, private decimalPipe: DecimalPipe) {}
   ngOnInit(): void {
     this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
       next: (data) => {
@@ -84,13 +83,13 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     });
     this.transferSubscription1 = this.transferFrom.get("send")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
-        this.transferFrom.get("get")?.setValue(data * this.exchangeRate, {emitEvent: false});
+        this.transferFrom.get("get")?.setValue(parseFloat(this.decimalPipe.transform(data * this.exchangeRate, '1.0-2')!.replace(/,/g, '')), {emitEvent: false});
       }
       
     })
     this.transferSubscription2 = this.transferFrom.get("get")?.valueChanges.subscribe(data => {
       if (!isNaN(Number(data))) {
-        this.transferFrom.get("send")?.setValue(data / this.exchangeRate, {emitEvent: false});
+        this.transferFrom.get("send")?.setValue(parseFloat(this.decimalPipe.transform(data / this.exchangeRate, '1.0-2')!.replace(/,/g, '')), {emitEvent: false});
       }
       
     })

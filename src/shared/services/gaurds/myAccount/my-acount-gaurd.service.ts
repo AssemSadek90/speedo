@@ -1,25 +1,25 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MyAcountGaurdService {
+export class MyAcountGaurdService implements CanActivate{
 
-  private token: string | null = null;
-  constructor(private router: Router,  @Inject(DOCUMENT) document: Document) {
-    const sessionStorage = document.defaultView?.sessionStorage;
-    if(sessionStorage) {
-      this.token = sessionStorage.getItem("token");
-  }
+  private token: string | null = "dummy-token";
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
    }
   canActivate(): boolean {
-    if (this.token) {
-      return true;
-    } else {
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = sessionStorage.getItem('token');
+      if (this.token) {
+        return true;
+      }
+
       this.router.navigate(['/error404']);
       return false;
     }
+    return true;
   }
 }
