@@ -70,6 +70,19 @@ export class NavLoginCompComponent {
     return null;
   }
 
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+  
+    if (password !== confirmPassword) {
+      control.get('confirmPassword')?.setErrors({ mismatch: 'Passwords do not match' });
+    } else {
+      control.get('confirmPassword')?.setErrors(null);
+    }
+  
+    return null;
+  }
+
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -79,7 +92,8 @@ export class NavLoginCompComponent {
     month: new FormControl('', [Validators.required]),
     year: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, this.strongPasswordValidator]),
-  });
+    confirmPassword: new FormControl('', [Validators.required])
+  },{ validators: this.passwordMatchValidator });
 
 
   constructor(private loginService: LoginService,private registerService: RegisterServiceService, private registerModalService: RegisterModalService, @Inject(PLATFORM_ID) private platformId: Object) {

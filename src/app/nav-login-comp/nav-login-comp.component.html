@@ -231,6 +231,7 @@
           <input
             class="py-4 px-8 grow"
             id="pass-input1"
+            formControlName="confirmPassword"
             [type]="showConfirmPassword ? 'text' : 'password'"
             placeholder="************"
           />
@@ -248,6 +249,12 @@
             src="assets/icons/Open-eye.svg"
             alt="👁️"
           />
+        </div>
+        <div
+          *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch'] as error"
+          class="text-[#871E35]"
+        >
+          {{ error }}
         </div>
         <p class="text-sm font-light text-[#565552]">
           The password should be at least eight characters long. To make it
