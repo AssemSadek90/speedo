@@ -13,6 +13,8 @@ import { PaymentCompComponent } from './payment-comp/payment-comp.component';
 import { PaymentGaurdService } from '../shared/services/gaurds/payment/payment-gaurd.service';
 import { HomeCompComponent } from './home-comp/home-comp.component';
 import { Error404Component } from './error404/error404.component';
+import { TransferGaurdService } from '../shared/services/gaurds/transfer/transfer-gaurd.service';
+import { MyAcountGaurdService } from '../shared/services/gaurds/myAccount/my-acount-gaurd.service';
 
 
 export const routes: Routes = [
@@ -20,6 +22,7 @@ export const routes: Routes = [
   {
     path: 'transfer',
     component: TransferCompComponent,
+    canActivate: [TransferGaurdService],
     children: [
       { path: '', redirectTo: 'amount', pathMatch: 'full' },
       { path: 'amount', component: AmountCompComponent },
@@ -36,7 +39,7 @@ export const routes: Routes = [
       { path: '**', redirectTo: 'amount' },
     ],
   },
-  { path: 'myaccount', component: MyAccountComponent,
+  { path: 'myaccount', component: MyAccountComponent, canActivate: [MyAcountGaurdService],
     children: [
       { path: '', redirectTo: 'myprofile', pathMatch: 'full' },
       { path: 'myprofile', component: MyProfileComponent, },

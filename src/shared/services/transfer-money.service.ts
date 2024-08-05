@@ -19,7 +19,7 @@ export class TransferMoneyService {
 
       this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("accessToken")}}`
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}}`
     });
   }
   }

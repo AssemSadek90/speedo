@@ -7,6 +7,7 @@ import { CurrencyService } from '../currency-service.service';
 import { Subscription } from 'rxjs';
 import { FavouriteService } from '../../shared/services/favourite.service';
 import { ProfileInfoService } from '../../shared/services/profile-info.service';
+import { RegisterModalService } from '../../shared/services/register-modal.service';
 
 export function greaterThanZeroValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -67,12 +68,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
     recipientName: new FormControl('', [Validators.required]),
     recipientAccount: new FormControl('', [Validators.required, digitsOnlyValidator()]),
   })
-  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, @Inject(DOCUMENT) private document: Document, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService) {
-    const sessionStorage = document.defaultView?.sessionStorage;
-    if(sessionStorage) {
-      sessionStorage.setItem("accessToken", "HelloWorld");
-  }
-  }
+  constructor(private globalService: GlobalService, private router: Router, private currencyService: CurrencyService, private favouriteService: FavouriteService, private profileInfoService: ProfileInfoService) {}
   ngOnInit(): void {
     this.currencySubscribtion1 = this.currencyService.getExchangeRate(this.currencyFrom).subscribe({
       next: (data) => {
