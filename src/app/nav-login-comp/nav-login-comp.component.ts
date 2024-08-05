@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { eachYearOfInterval, getDaysInMonth } from 'date-fns';
 import { RouterLink } from '@angular/router';
@@ -43,9 +44,32 @@ export class NavLoginCompComponent {
 
    phoneNumber = "+1234567890";
    address= "123 Main St";
-   nationalIdNumber= "12345678901234";
+   nationalIdNumber= 12345678901234;
    gender= "MALE";
    
+   strongPasswordValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value as string;
+    if (!value) {
+      return null;
+    }
+  
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasNumber = /\d/.test(value);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    const validLength = value.length >= 8;
+  
+    const isValid = hasUpperCase && hasLowerCase && hasNumber && hasSymbol && validLength;
+  
+    if (!isValid) {
+      return {
+        strongPassword: 'Password must be at least 8 characters long and include upper and lower case letters, numbers, and symbols.'
+      };
+    }
+  
+    return null;
+  }
+
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -54,11 +78,11 @@ export class NavLoginCompComponent {
     day: new FormControl('', [Validators.required]),
     month: new FormControl('', [Validators.required]),
     year: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, this.strongPasswordValidator]),
   });
 
 
-  constructor(private loginService: LoginService,private registerService: RegisterServiceService, private registerModalService: RegisterModalService) {
+  constructor(private loginService: LoginService,private registerService: RegisterServiceService, private registerModalService: RegisterModalService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.years = eachYearOfInterval({ start: new Date().setFullYear(this.selectedYear - 100), end: new Date() }).map(date => date.getFullYear());
     this.updateDays();
   }
@@ -66,6 +90,11 @@ export class NavLoginCompComponent {
     this.registerModalService.registerModalVisible$.subscribe((isVisible) => {
       this.isRegisterModalHidden = !isVisible;
     });
+    if (isPlatformBrowser(this.platformId)) {
+      if (sessionStorage.getItem('token') !== null) {
+      this.tokenAvailable = true;
+  }
+    }
   }
 
   updateDays() {
@@ -109,7 +138,7 @@ export class NavLoginCompComponent {
     if (this.registerForm.invalid) return;
     let dateOfBirth = `${this.registerForm.get('year')?.value}-${this.registerForm.get('month')?.value}-${this.registerForm.get('day')?.value}`;
     try{
-      await this.registerService.registerRequest(this.registerForm.get('firstName')?.value!, this.registerForm.get('lastName')?.value!, this.registerForm.get('email')?.value!,"01064065523","123 Main St", this.registerForm.get('nationality')?.value!,"12345678901234","MALE",dateOfBirth,  this.registerForm.get('password')?.value!);
+      await this.registerService.registerRequest(this.registerForm.get('firstName')?.value!, this.registerForm.get('lastName')?.value!, this.registerForm.get('email')?.value!,"01064065523","123 Main St", this.registerForm.get('nationality')?.value!,12345678901234,"MALE",dateOfBirth,  this.registerForm.get('password')?.value!);
       this.tokenAvailable = this.registerService.id !== undefined;
       this.registerModalService.closeRegisterModal();
     }catch(error){

@@ -1,20 +1,66 @@
 <section class="w-full h-dvh flex">
   <!-- <img class="banner-image relative" src="assets/Img header.jpg" alt="" /> -->
   <div class="w-[90%] mx-auto flex items-center justify-between">
-    <div class="container flex flex-col justify-center space-y-8 max-w-[40%]">
+    <div
+      class="container flex flex-col justify-center space-y-8 max-w-[40%] w-780-max:max-w-[90%]"
+    >
       <p>Simple. Quick. Secure.</p>
       <p class="text-4xl">Send Money Anywhere, Instantly</p>
       <p>
         Fast, secure, and affordable international money transfers. Get started
         in minutes
       </p>
-      <button
-        (click)="handleCreateAccount()"
-        class="prim-button py-4 px-8 rounded-[6.5px] max-w-fit"
-      >
-        Create An Account
-      </button>
+      <div class="flex space-x-4">
+        <button
+          (click)="handleCreateAccount()"
+          class="prim-button py-4 px-8 rounded-[6.5px] max-w-fit"
+        >
+          Create An Account
+        </button>
+        <button
+          (click)="handleExchangeRate()"
+          class="prim-button py-4 px-8 rounded-[6.5px] max-w-fit hidden w-780-max:inline-block"
+        >
+          Learn Exchange Rates
+        </button>
+      </div>
     </div>
-    <transfer-card-comp class="min-w-[35%]"></transfer-card-comp>
+    <transfer-card-comp
+      class="min-w-[35%] w-780-max:hidden"
+    ></transfer-card-comp>
   </div>
 </section>
+
+<div
+  *ngIf="!isExchangeRateOpen"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleExchangeRate()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <transfer-card-comp class="max-w-[80%] mx-auto"></transfer-card-comp>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
+</div>
