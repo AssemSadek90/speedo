@@ -18,15 +18,15 @@ export class FavouriteService {
 
       this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("token")}}`
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
     });
   }
   }
   
   getFavouritesRequest(): Observable<any[]>  {
-    return this.httpClient.get<any>(`${this.apiUrl}${this.apiEndPoint}`)
+    return this.httpClient.get<any>(`${this.apiUrl}${this.apiEndPoint}`,{headers: this.headers})
   }
   postFavoriteRequest(name: string, account: number, status: number): Observable<any[]> {
-    return this.httpClient.post<any>(`${this.apiUrl}${this.apiEndPoint}`, {name, account, status})
+    return this.httpClient.post<any>(`${this.apiUrl}${this.apiEndPoint}`, {fullName: name,accNum: account}, {headers: this.headers})
   }
 }

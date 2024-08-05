@@ -45,7 +45,7 @@
       <div></div>
       <div
         *ngFor="let item of listFavourites"
-        (click)="handleItemListFavurite(item.name, item.account)"
+        (click)="handleItemListFavurite(item.fullName, item.accNum)"
         class="p-4 flex gap-8 w-full bg-[#F6F6F6] rounded-lg cursor-pointer w-485-max:gap-[1rem]"
       >
         <div class="flex items-center">
@@ -72,10 +72,10 @@
         </div>
         <div>
           <p class="text-xl font-semibold leading-[150%] w-545-max:text-[1rem]">
-            {{ item.name }}
+            {{ item.fullName }}
           </p>
           <p class="text-[#898886] w-545-max:text-[14px]">
-            Account {{ item.account }}
+            Account {{ item.accNum }}
           </p>
         </div>
       </div>

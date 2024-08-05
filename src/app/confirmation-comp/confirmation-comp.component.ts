@@ -25,10 +25,8 @@ export class ConfirmationCompComponent implements OnInit, OnDestroy {
     
   }
   handleConfirm() : void {
-    this.transferMoney.postTransferMoney(this.formData.amountToSend, this.formData.amountToRecieve,this.formData.currencyToSend , this.formData.currencyToRecieve, this.formData.fromName, this.formData.toName,this.formData.fromAccNum, this.formData.toAccNum, this.formData.fees, 200).subscribe((res: any) => {
-      console.log(res);
-      this.status = res.status;
-      if (this.status === 200) {
+    this.transferMoney.postTransferMoney(this.formData.amountToSend, this.formData.amountToRecieve,this.formData.currencyToSend , this.formData.currencyToRecieve, this.formData.fromName, this.formData.toName,this.formData.fromAccNum, this.formData.toAccNum, this.formData.fees).subscribe((res: any) => {
+      if (res.message === "Money sent successfully") {
         this.globalService.setTransferStatusVariable("payment")
       this.router.navigate(["/transfer", "payment"])
       } else {

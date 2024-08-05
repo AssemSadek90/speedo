@@ -19,12 +19,12 @@ export class TransferMoneyService {
 
       this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("token")}}`
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
     });
   }
   }
   
-  postTransferMoney(amountToSend: number, amountToRecieve: number, currencyToSend: string, currencyToRecieve: string, fromName: string, toName: string, fromAccNum: number, toAccNum: number, fees: number, status :number): Observable<any[]>  {
-    return this.httpClient.post<any>(`${this.apiUrl}${this.apiEndPoint}`, {amountToSend, amountToRecieve, currencyToSend, currencyToRecieve, fromName, toName, fromAccNum, toAccNum, fees, status})
+  postTransferMoney(amountToSend: number, amountToRecieve: number, currencyToSend: string, currencyToRecieve: string, fromName: string, toName: string, fromAccNum: number, toAccNum: number, fees: number): Observable<any[]>  {
+    return this.httpClient.post<any>(`${this.apiUrl}${this.apiEndPoint}`, {amountToSend, amountToRecieve, currencyToSend, currencyToRecieve, fromName, toName, fromAccNum, toAccNum, fees}, {headers: this.headers})
   }
 }

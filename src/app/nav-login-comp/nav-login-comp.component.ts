@@ -119,7 +119,7 @@ export class NavLoginCompComponent {
     this.registerForm.controls.year.setValue(String(this.selectedYear));
   }
 
-  tokenAvailable: boolean = this.loginService.id !== undefined;
+  tokenAvailable: boolean = this.loginService.token !== undefined;
 
   async onSubmit() {
     if (this.loginForm.invalid) return;
@@ -127,7 +127,7 @@ export class NavLoginCompComponent {
     try {
       const { email, password } = this.loginForm.value;
       await this.loginService.loginRequest(email!, password!);
-      this.tokenAvailable = this.loginService.id !== undefined;
+      this.tokenAvailable = this.loginService.token !== undefined;
       this.isLoginModalHidden = true;
     } catch (error) {
       console.error('Login failed', error);
