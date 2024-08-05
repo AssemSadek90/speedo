@@ -146,7 +146,7 @@ export class AmountCompComponent implements OnDestroy, OnInit{
       return;
     };
     this.isSubmitted = false;
-    this.globalService.setDataOfForm({amountToSend: Number(this.transferFrom.value.send), amountToRecieve: Number(this.transferFrom.value.get), currencyToSend: this.currencyFrom, currencyToRecieve: this.currencyTo, fromName: this.profileInfo.firstName + " " + this.profileInfo.lastName, toName: this.transferFrom.value.recipientName, fromAccNum : Number(this.profileInfo.accNum), toAccNum: Number(this.transferFrom.value.recipientAccount), fees: Number(this.transferFrom.value.send) * 0.01897});
+    this.globalService.setDataOfForm({amountToSend: Number(this.transferFrom.value.send), amountToRecieve: Number(this.transferFrom.value.get), currencyToSend: this.currencyFrom, currencyToRecieve: this.currencyTo, fromName: this.profileInfo.firstName + " " + this.profileInfo.lastName, toName: this.transferFrom.value.recipientName, fromAccNum : Number(this.profileInfo.accNum), toAccNum: Number(this.transferFrom.value.recipientAccount), fees: parseFloat(this.decimalPipe.transform(this.transferFrom.value.send * 0.01897, '1.0-2')!.replace(/,/g, ''))});
     this.globalService.setTransferStatusVariable("confirmation");
     this.router.navigate(["/transfer", "confirmation"]);
     console.log("Submit button clicked");

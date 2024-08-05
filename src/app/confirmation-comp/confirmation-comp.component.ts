@@ -4,7 +4,7 @@ import { GlobalService } from '../../shared/services/global.service';
 import { Subscription } from 'rxjs';
 import { ProfileInfoService } from '../../shared/services/profile-info.service';
 import { TransferMoneyService } from '../../shared/services/transfer-money.service';
-import { NgIf } from '@angular/common';
+import { DecimalPipe, NgIf } from '@angular/common';
 import { DataOfForm } from '../../shared/services/models/dataOfForm';
 
 @Component({
@@ -12,26 +12,31 @@ import { DataOfForm } from '../../shared/services/models/dataOfForm';
   standalone: true,
   imports: [NgIf],
   templateUrl: './confirmation-comp.component.html',
-  styleUrl: './confirmation-comp.component.scss'
+  styleUrl: './confirmation-comp.component.scss',
+  providers: [DecimalPipe]
 })
 export class ConfirmationCompComponent implements OnInit, OnDestroy {
   formData!: DataOfForm;
   transferMoneySubscription!: Subscription;
   status!: number;
   isFailureMessage: boolean = false;
-  constructor(private globalService: GlobalService,private router: Router, private profileInfoService: ProfileInfoService, private transferMoney: TransferMoneyService) { }
+  failureMessage: string = "";
+  constructor(private globalService: GlobalService,private router: Router, private profileInfoService: ProfileInfoService, private transferMoney: TransferMoneyService, private decimalPipe: DecimalPipe) { }
   ngOnInit(): void {
     this.formData = this.globalService.getDataOfForm();
-    
+
   }
   handleConfirm() : void {
-    this.transferMoney.postTransferMoney(this.formData.amountToSend, this.formData.amountToRecieve,this.formData.currencyToSend , this.formData.currencyToRecieve, this.formData.fromName, this.formData.toName,this.formData.fromAccNum, this.formData.toAccNum, this.formData.fees).subscribe((res: any) => {
-      if (res.message === "Money sent successfully") {
+    this.transferMoney.postTransferMoney(this.formData.amountToSend, this.formData.amountToRecieve,this.formData.currencyToSend , this.formData.currencyToRecieve, this.formData.fromName, this.formData.toName,this.formData.fromAccNum, this.formData.toAccNum, this.formData.fees).subscribe({next: (res: any) => {
+      console.log(this.status);
         this.globalService.setTransferStatusVariable("payment")
       this.router.navigate(["/transfer", "payment"])
-      } else {
-        this.isFailureMessage = true
-      }
+    }, error: (err: any) => {
+      console.log(err);
+      this.failureMessage = err.error.detail;
+      this.isFailureMessage = true;
+    }
+
     })
 
     

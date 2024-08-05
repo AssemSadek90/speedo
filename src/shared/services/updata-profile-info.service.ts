@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
@@ -13,12 +13,13 @@ export class UpdataProfileInfoService {
   apiEndPoint = environment.updateProfileInfo.endpoint;
   headers!: HttpHeaders;
  
-  constructor(private httpClient: HttpClient, @Inject(DOCUMENT) document: Document) {
+  constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     const sessionStorage = document.defaultView?.sessionStorage;
     
   }
   updateProfileInfo(firstName:string, lastName:string, email: string, phoneNumber: string): Observable<any> {
-    if(sessionStorage) {
+    if(isPlatformBrowser(this.platformId)) {
+
       this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${sessionStorage.getItem("token")}`

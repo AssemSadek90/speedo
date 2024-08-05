@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,13 +13,13 @@ export class PaymentHistoryService {
   apiEndPoint = environment.paymentHistory.endpoint;
   headers!: HttpHeaders;
  
-  constructor(private httpClient: HttpClient, @Inject(DOCUMENT) document: Document) {
-    const sessionStorage = document.defaultView?.sessionStorage;
+  constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     
   }
   
   getPaymentHistory(): Observable<any[]>  {
-    if(sessionStorage) {
+    if(isPlatformBrowser(this.platformId)) {
+
       this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${sessionStorage.getItem("token")}`
