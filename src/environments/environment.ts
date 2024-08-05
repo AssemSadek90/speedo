@@ -25,4 +25,4 @@ export const environment = {
     updateProfileInfo: {
         endpoint: '/updateProfileInfo',
     }
-  };
+};
