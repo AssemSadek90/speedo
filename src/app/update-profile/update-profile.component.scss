@@ -1,0 +1,22 @@
+@import "../../shared/globalVariables";
+section{
+    font-family:  "Inter", sans-serif;
+    
+}
+h4{
+    font-weight: 500;
+    font-size: 24px;
+}
+input{
+    border-color: $primary-color;
+}
+
+
+button{
+    background-color: $primary-color;
+    border-radius: 6.5px;
+    border: 1px;
+}
+button:hover{
+    transform: scale(1.1);
+}

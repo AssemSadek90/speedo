@@ -1,1 +1,309 @@
-{}
+{
+  "login": [
+    {
+      "id": "0d65",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "2586286",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "1905",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "82628286",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "6a36",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "27527525",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "313e",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "52752752",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "c701",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "17527526",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "c03f",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "15245245",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "ef4c",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "175275257",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "8b8a",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "165184894",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "c2ab",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "12151515",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "c956",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "124532453",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "b499",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "12346879",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "7ac8",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "5757857857",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "0dd5",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "12345678",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    },
+    {
+      "id": "9d0d",
+      "email": "eslamelkfafy@gmail.com",
+      "password": "984984",
+      "token": "helloworld",
+      "firstName": "john",
+      "lastName": "doe"
+    }
+  ],
+  "register": [
+    {
+      "id": "719a",
+      "firstName": "eslam",
+      "lastName": "adel",
+      "email": "eslamadel52@gmail.com",
+      "phoneNumber": "01064065523",
+      "address": "123 Main St",
+      "nationality": "Egyptian",
+      "nationalIdNumber": "12345678901234",
+      "gender": "MALE",
+      "dateOfBirth": "2002-12-8",
+      "password": "123",
+      "token": "helloworld"
+    }
+  ],
+  "favourites": [
+    {
+      "itemId": 1,
+      "name": "Jonathon Smith",
+      "account": 123456789456,
+      "id": "78cf"
+    },
+    {
+      "itemId": 2,
+      "name": "Jonathon Smith",
+      "account": 123456789456,
+      "id": "2a23"
+    },
+    {
+      "itemId": 3,
+      "name": "Jonathon Smith",
+      "account": 123456789456,
+      "id": "e7f3"
+    },
+    {
+      "id": "01f7",
+      "name": "eslam adel",
+      "account": 123456789456,
+      "status": 200
+    },
+    {
+      "id": "abad",
+      "name": "eslam adel",
+      "account": 123456789456,
+      "status": 200
+    },
+    {
+      "id": "713f",
+      "name": "eslam adel",
+      "account": 123456789456,
+      "status": 200
+    }
+  ],
+  "profileInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phoneNumber": "(555) 123-4567",
+    "gender": "Male",
+    "accNum": "1234567890",
+    "balance": 1234.56
+  },
+  "updateProfileInfo": {
+    "firstName": "Jonathon",
+    "lastName": "Smith",
+    "email": "john.smith@example.com",
+    "phoneNumber": "555-555-5555"
+  },
+  "transferMoney": [
+    {
+      "amountToSend": 1000,
+      "amountToRecieve": 950,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EUR",
+      "fromName": "John Doe",
+      "toName": "Jane Smith",
+      "fromAccNum": "123456789",
+      "toAccNum": "987654321",
+      "fees": 50,
+      "status": 200,
+      "id": "8fcd"
+    },
+    {
+      "id": "fe39",
+      "amountToSend": 0,
+      "amountToRecieve": 0,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": "123456789456",
+      "fees": 0,
+      "status": 200
+    },
+    {
+      "id": "dd7b",
+      "amountToSend": 0,
+      "amountToRecieve": 0,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": "123456789456",
+      "fees": 0,
+      "status": 200
+    },
+    {
+      "id": "f930",
+      "amountToSend": 0,
+      "amountToRecieve": 0,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "",
+      "fromAccNum": 123456789456,
+      "toAccNum": "",
+      "fees": 0,
+      "status": 200
+    },
+    {
+      "id": "bb34",
+      "amountToSend": 1000,
+      "amountToRecieve": 48680.799999999996,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": 123456789456,
+      "fees": 18.970000000000002,
+      "status": 200
+    },
+    {
+      "id": "02ed",
+      "amountToSend": 1000,
+      "amountToRecieve": 48680.799999999996,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "Jonathon Smith",
+      "toName": "eslam adel",
+      "fromAccNum": 123456789456,
+      "toAccNum": 123456789456,
+      "fees": 18.970000000000002,
+      "status": 200
+    },
+    {
+      "id": "cb4e",
+      "amountToSend": 100,
+      "amountToRecieve": 4868.08,
+      "currencyToSend": "USD",
+      "currencyToRecieve": "EGP",
+      "fromName": "John Doe",
+      "toName": "eslam adel",
+      "fromAccNum": 1234567890,
+      "toAccNum": 123456789456,
+      "fees": 1.897,
+      "status": 200
+    }
+  ],
+  "paymentHistory": [
+    {
+      "accountNum": "A123456789",
+      "name": "Alice Johnson",
+      "totalPrice": 250.75,
+      "id": "8aed"
+    },
+    {
+      "accountNum": "B987654321",
+      "name": "Bob Smith",
+      "totalPrice": 142.3,
+      "id": "3dfa"
+    },
+    {
+      "accountNum": "C555555555",
+      "name": "Carol Davis",
+      "totalPrice": 305.6,
+      "id": "9796"
+    },
+    {
+      "accountNum": "D666666666",
+      "name": "David Lee",
+      "totalPrice": 78.9,
+      "id": "08d6"
+    }
+  ],
+  "changePassword": {
+    "oldPassword": "fwewef",
+    "newPassword": "fwefwefewf",
+    "status": 200
+  }
+}

@@ -1,8 +1,319 @@
-<div class="flex space-x-4">
-  <button class="second-button border border-black rounded-[6.5px] py-4 px-8">
-    Login
-  </button>
-  <button class="prim-button text-white rounded-[6.5px] py-4 px-8">
-    Register Now
-  </button>
+<div
+  *ngIf="!isLoginModalHidden"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleOpenLoginModal()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col mx-auto lg:w-[40%] md:w-[60%] sm:w-[80%] p-8 space-y-4 overflow-auto"
+    >
+      <span class="text-4xl">Login here</span>
+      <span class="text-[#565552]">welcome back. Login to your account</span>
+      <label for="email">Your email address</label>
+      <input
+        class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+        id="email"
+        type="text"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <label for="password">Password</label>
+      <input
+        class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+        type="password"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <button
+        type="submit"
+        class="prim-button text-white rounded-[6.5px] py-4 px-8"
+      >
+        Login
+      </button>
+      <span
+        >Don't have an account?
+        <span class="prim" (click)="handleCreateAccount()"
+          >Create Account</span
+        ></span
+      >
+    </form>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
 </div>
+
+<div
+  *ngIf="!isRegisterModalHidden"
+  class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.5)] z-20"
+>
+  <div
+    class="absolute w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_20px_0px_rgba(108,118,134,0.10)] flex flex-col justify-between gap-9 z-20 bg-white"
+  >
+    <div class="flex justify-between px-[5%] mt-[2.5%]">
+      <span class="text-4xl">Speedo Transfer</span>
+      <svg
+        class="cursor-pointer"
+        (click)="handleCloseRegisterModal()"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75702L12 12L6.758 6.75702"
+          stroke="#24221E"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="flex flex-col px-[5%] space-y-4">
+      <span class="text-4xl">Create Your Account</span>
+      <span class="text-[#565552]"
+        >Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+        tempor incididunt ut labore.</span
+      >
+    </div>
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmitRegister()"
+      class="grid lg:grid-cols-2 md:grid-col-1 sm:grid-col-1 sm:gap-y-4 px-4 gap-x-[5%] lg:w-[70%] md:w-[90%] sm:w-[95%] mx-auto overflow-y-auto"
+    >
+      <div class="flex flex-col space-y-4">
+        <div class="flex space-x-4">
+          <label class="w-[50%]" for="firstName">First Name</label>
+          <label class="w-[50%]" for="lastName">Last Name</label>
+        </div>
+        <div class="flex space-x-4">
+          <input
+            class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8 max-w-[48%]"
+            id="firstName"
+            type="text"
+            formControlName="firstName"
+          />
+          <input
+            class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8 max-w-[48%]"
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+          />
+        </div>
+        <label for="email">Email address</label>
+        <input
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          id="email"
+          type="email"
+          formControlName="email"
+        />
+        <label for="nationality">Country</label>
+        <select
+          class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+          id="nationality"
+          formControlName="nationality"
+        >
+          <option value="Egyptian">EG</option>
+          <option value="British">UK</option>
+          <option value="American">US</option>
+          <option value="German">DE</option>
+        </select>
+      </div>
+      <div class="flex flex-col space-y-4">
+        <div class="flex space-x-4">
+          <div class="flex flex-col space-y-4">
+            <label for="day">Day of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="day"
+              name="day"
+              formControlName="day"
+            >
+              <option value="">DD</option>
+              <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <label for="month">Month of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="month"
+              name="month"
+              formControlName="month"
+              [(ngModel)]="selectedMonth"
+              (change)="onMonthChange(selectedMonth)"
+            >
+              <option value="">Month</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </option>
+            </select>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <label for="year">Year of birth</label>
+            <select
+              class="border border-[#B0AFAE] rounded-[6.5px] py-4 px-8"
+              id="year"
+              name="year"
+              formControlName="year"
+              [(ngModel)]="selectedYear"
+              (change)="onYearChange(selectedYear)"
+            >
+              <option value="">YYYY</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <label for="password">Password</label>
+        <div
+          class="flex justify-between items-center border border-[#B0AFAE] rounded-[6.5px] pe-4"
+        >
+          <input
+            class="py-4 px-8 grow"
+            id="pass-input1"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="************"
+          />
+          <img
+            *ngIf="!showPassword"
+            (click)="handleShowPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Close-eye.svg"
+            alt="👁️"
+          />
+          <img
+            *ngIf="showPassword"
+            (click)="handleShowPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Open-eye.svg"
+            alt="👁️"
+          />
+        </div>
+        <div
+          *ngIf="registerForm.controls.password.errors?.['strongPassword'] as error"
+          class="text-[#871E35]"
+        >
+          {{ error }}
+        </div>
+        <label for="confirm-password">Confirm Password</label>
+        <div
+          class="flex justify-between items-center border border-[#B0AFAE] rounded-[6.5px] pe-4"
+        >
+          <input
+            class="py-4 px-8 grow"
+            id="pass-input1"
+            formControlName="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            placeholder="************"
+          />
+          <img
+            *ngIf="!showConfirmPassword"
+            (click)="handleShowConfirmPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Close-eye.svg"
+            alt="👁️"
+          />
+          <img
+            *ngIf="showConfirmPassword"
+            (click)="handleShowConfirmPassword()"
+            class="w-6 h-6 cursor-pointer"
+            src="assets/icons/Open-eye.svg"
+            alt="👁️"
+          />
+        </div>
+        <div
+          *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch'] as error"
+          class="text-[#871E35]"
+        >
+          {{ error }}
+        </div>
+        <p class="text-sm font-light text-[#565552]">
+          The password should be at least eight characters long. To make it
+          stronger, use upper and lower case letters, numbers, and symbols like
+          ! " ? $ % ^ & )
+        </p>
+      </div>
+      <button
+        type="submit"
+        class="prim-button lg:col-span-2 md:col-span-1 sm:col-span-1 text-white rounded-[6.5px] w-[60%] mx-auto mt-4 py-4 px-8"
+      >
+        Create An Account
+      </button>
+      <div
+        class="flex justify-center items-center mt-2 lg:col-span-2 md:col-span-1 sm:col-span-1"
+      >
+        Already have an account?
+        <span class="prim text-center" (click)="handleLoginFromRegister()"
+          >Login</span
+        >
+      </div>
+    </form>
+    <div class="h-14 bg-[#F3E9EB] flex justify-center items-center">
+      <span>©Speedo Transfer Payments Limited 2024</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!tokenAvailable; else loggedIn">
+  <div class="flex gap-4 w-780-max:hidden">
+    <button
+      (click)="handleOpenLoginModal()"
+      class="second-button border border-black rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4"
+    >
+      Login
+    </button>
+    <button
+      (click)="handleOpenRegisterModal()"
+      class="prim-button text-white rounded-[6.5px] py-4 px-8 w-910-max:py-2 w-910-max:px-4"
+    >
+      Register Now
+    </button>
+  </div>
+
+  <span (click)="handleOpenLoginModal()" class="w-780-max:pr-4 w-485-max:pr-4">
+    <svg
+      class="h-[24px] w-[24px] hidden w-780-max:inline-block w-485-max:w-[16px] w-485-max:h-[16px] fill-[#871E35]"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
+      />
+    </svg>
+  </span>
+</div>
+
+<ng-template #loggedIn>
+  <div class="flex space-x-4 w-910-max:text-[16px]">
+    <login-dropdown (loggedOut)="handleLogout()"></login-dropdown>
+  </div>
+</ng-template>

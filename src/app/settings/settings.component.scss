@@ -1,0 +1,25 @@
+@import "../../shared/globalVariables";
+section{
+    font-family:  "Inter", sans-serif;
+    
+}
+h4{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+}
+.b-nv{
+    color: gray;
+    font-weight: 600;
+    line-height: 30px;
+    background-color: white; 
+    
+}
+.b-nv:hover{
+    color:  $primary-color;
+}
+.active{
+    color: $primary-color;
+    border-bottom: 2px solid $primary-color;
+}
+

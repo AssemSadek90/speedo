@@ -1,0 +1,45 @@
+<div class="bg-white rounded-lg">
+  <div class="p-8 flex flex-col space-y-8">
+    <label for="send">You Send</label>
+    <div class="flex border border-[#E3E2E2] rounded-lg">
+      <input
+        class="p-4 grow rounded-s-lg"
+        id="send"
+        type="number"
+        [(ngModel)]="amountToSend"
+        (input)="onAmountToSendChange()"
+      />
+      <select
+        class="p-4 bg-[#E3E2E2] rounded-e-lg"
+        [(ngModel)]="fromCurrency"
+        (change)="updateRecipientAmount()"
+      >
+        <option value="USD">USD</option>
+        <option value="SAR">SAR</option>
+        <option value="EGP">EGP</option>
+        <option value="KWD">KWD</option>
+      </select>
+    </div>
+    <label for="gets">Recipient Gets</label>
+    <div class="flex border border-[#E3E2E2] rounded-lg">
+      <input
+        class="p-4 grow rounded-s-lg"
+        id="gets"
+        type="number"
+        [(ngModel)]="amountToReceive"
+        (input)="onRecipientAmountChange()"
+      />
+      <select
+        class="p-4 bg-[#E3E2E2] rounded-e-lg"
+        [(ngModel)]="toCurrency"
+        (change)="updateRecipientAmount()"
+      >
+        <option value="USD">USD</option>
+        <option value="EGP">EGP</option>
+        <option value="SAR">SAR</option>
+        <option value="KWD">KWD</option>
+      </select>
+    </div>
+    <button class="w-full rounded-[6.5px] py-4 text-white">Continue</button>
+  </div>
+</div>

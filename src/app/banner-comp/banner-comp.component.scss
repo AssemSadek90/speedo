@@ -1,0 +1,19 @@
+@import '../../shared/_globalVariables';
+
+section{
+    background-image: url('../../../public/assets/Img header.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.prim-button{
+    background-color: $primary-color;
+}
+.container{
+    color: $secondary-color;
+}
+button{
+    background-color: $primary-color;
+}
+button:hover{
+    background-color: darken($primary-color,10%);
+}

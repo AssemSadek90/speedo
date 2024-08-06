@@ -1,0 +1,30 @@
+@import "../../shared/globalVariables";
+
+.active {
+    background-color: $primary-color;
+}
+
+.bg-primary-color{
+    background-color: $primary-color;
+}
+.text-color-ter{
+    color: $tertiary-color;
+}
+aside{
+    background-color: 
+    #edeff1;
+}
+li{
+    border: 1px  #3C3A37;
+    color: $tertiary-color; ;
+}
+li:hover{
+    background-color: $primary-color;
+    color: white;
+    
+}
+
+.active{
+    background-color: $primary-color;
+    color: white;
+}

@@ -13,3 +13,20 @@
 .second-button:hover{
     background-color: darken(white, 20%);
 }
+
+input:focus{
+    outline:2px solid #B0AFAE;
+}
+
+.prim{
+    color: $primary-color;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#pass-input1:focus{
+    outline:none;
+}
+#pass-input2:focus{
+    outline:none;
+}

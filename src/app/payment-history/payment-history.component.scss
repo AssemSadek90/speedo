@@ -1,0 +1,15 @@
+@import "../../shared/globalVariables";
+section{
+    font-family:  "Inter", sans-serif;
+    
+}
+.accNUM{
+    background-color: $secondary-color;
+    user-select: auto;
+    border-radius: 5px;
+
+}
+h4{
+    font-weight: 600;
+    font-size: 25px;
+}

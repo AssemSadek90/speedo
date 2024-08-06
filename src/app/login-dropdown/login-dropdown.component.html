@@ -1,0 +1,22 @@
+<div class="dropdown z-20" (click)="toggleDropdown()">
+  <button class="dropdown-toggle">
+    <span class="bg-[#E3E2E2] text-2xl rounded-full p-2 mx-2">{{
+      initials
+    }}</span
+    >{{ username }}
+    <span [class.flipped]="isDropdownOpen"
+      ><img src="assets/icons/DRop down.svg" alt=""
+    /></span>
+  </button>
+  <div class="dropdown-menu" [class.show]="isDropdownOpen">
+    <a class="dropdown-item" routerLink="/myaccount">My Account</a>
+    <a class="dropdown-item" routerLink="/myaccount/paymenthistory"
+      >Payment History</a
+    >
+    <a class="dropdown-item" routerLink="/myaccount/settings">Settings</a>
+    <a class="dropdown-item" routerLink="/myaccount/settings/changepassword"
+      >Change Password</a
+    >
+    <a class="dropdown-item cursor-pointer" (click)="onLogout()">Logout</a>
+  </div>
+</div>
