@@ -283,7 +283,7 @@
   </div>
 </div>
 
-<div *ngIf="!tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
+<div *ngIf="!tokenAvailable; else loggedIn">
   <div class="flex gap-4 w-780-max:hidden">
     <button
       (click)="handleOpenLoginModal()"
@@ -312,6 +312,8 @@
   </span>
 </div>
 
-<div *ngIf="tokenAvailable" class="flex space-x-4 w-910-max:text-[16px]">
-  <login-dropdown (loggedOut)="handleLogout()"></login-dropdown>
-</div>
+<ng-template #loggedIn>
+  <div class="flex space-x-4 w-910-max:text-[16px]">
+    <login-dropdown (loggedOut)="handleLogout()"></login-dropdown>
+  </div>
+</ng-template>

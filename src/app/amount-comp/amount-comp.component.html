@@ -40,13 +40,14 @@
       Favourite List
     </div>
     <div
+      *ngIf="listFavourites.length > 0; else noFavourites"
       class="flex flex-col gap-4 overflow-y-auto h-[500px] w-545-max:h-[300px]"
     >
       <div></div>
       <div
         *ngFor="let item of listFavourites"
         (click)="handleItemListFavurite(item.fullName, item.accNum)"
-        class="p-4 flex gap-8 w-full bg-[#F6F6F6] rounded-lg cursor-pointer w-485-max:gap-[1rem]"
+        class="p-4 flex justify-around items-center w-full bg-[#F6F6F6] rounded-lg cursor-pointer w-485-max:gap-[1rem]"
       >
         <div class="flex items-center">
           <svg
@@ -78,8 +79,19 @@
             Account {{ item.accNum }}
           </p>
         </div>
+        <img
+          (click)="onDeleteFavourite($event, item.accNum)"
+          class="w-8 h-8"
+          src="assets/icons/trash-can.png"
+          alt="delete"
+        />
       </div>
     </div>
+    <ng-template #noFavourites>
+      <div class="flex justify-center items-center h-[500px]">
+        <p class="text-xl font-semibold">No Favourites</p>
+      </div>
+    </ng-template>
   </div>
 </div>
 

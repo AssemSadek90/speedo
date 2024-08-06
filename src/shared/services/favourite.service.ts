@@ -14,6 +14,15 @@ export class FavouriteService {
  
   constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
   }
+  deleteFavouriteRequest(accNum: number): Observable<any[]> {
+    if(isPlatformBrowser(this.platformId)) {
+      this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+    });
+  }
+    return this.httpClient.delete<any>(`${this.apiUrl}${this.apiEndPoint}/${accNum}`,{headers: this.headers})
+  }
   
   getFavouritesRequest(): Observable<any[]>  {
     if(isPlatformBrowser(this.platformId)) {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { InactivityService } from '../../shared/services/inactivity.service';
 @Component({
   selector: 'login-dropdown',
   standalone: true,
@@ -26,15 +27,24 @@ export class LoginDropdownComponent {
         .join(' ');
     }
   }
-  constructor(private router: Router) { }
+  constructor(private router: Router, private inactivityService: InactivityService) {
+    this.inactivityService.inactivity$.subscribe({
+      next: () => {
+        if (sessionStorage.getItem('token')) {window.alert('You have been logged out due to inactivity')};
+        this.onLogout();
+      },
+      error: (error) => console.error('Error logging out', error)
+    });
+   }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
   onLogout() {
-    console.log('Logging out');
+    if (!sessionStorage.getItem('token')) return;
     this.loggedOut.emit();
     this.router.navigate(['/']);
     this.toggleDropdown()
     sessionStorage.clear();
   }
+  
 }

@@ -40,7 +40,12 @@ export class AmountCompComponent implements OnDestroy, OnInit{
   listFavouritesSubscription!: Subscription;
   profileInfoSubscription!: Subscription;
 
-
+  onDeleteFavourite(event: MouseEvent, item: any): void {
+    event.stopPropagation();
+    this.favouriteService.deleteFavouriteRequest(item).subscribe(res => {
+      this.listFavourites = res;
+    })
+  }
 
   transferFrom: FormGroup = new FormGroup({
     send: new FormControl(0, [Validators.required, this.validatorsService.greaterThanZeroValidator()]),
