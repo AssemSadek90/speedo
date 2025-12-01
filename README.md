@@ -1,27 +1,63 @@
-# Speedo
+# Speedo 🚀
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+**Speedo** is a modern online banking web application built with **Angular**, designed to deliver a clean UI, responsive layouts, and an overall smooth user experience.  
+Its purpose is to simulate core online-banking functionalities such as account overviews, balance display, transactions, and more.
 
-## Development server
+[**Click here for Demo**](https://speedo-rho.vercel.app/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 📸 Demo & Screenshots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Landing Page Preview**  
+  ![GIF 1](HomePage.gif)
 
-## Build
+- **Register Screenshot**  
+  ![IMG 1](Register.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Account Page Preview**  
+  ![GIF 2](MyAccount.gif)
 
-## Running unit tests
+- **Landing Page Responsiveness**  
+  ![GIF 3](Speedo_Res.gif)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## ✨ Features
 
-## Further help
+- User authentication (Login / Signup)
+  - Signup with password strength validators 
+- Modern and clean UI built with Angular components
+- Fully responsive — optimized for desktop, tablet, and mobile
+- Dashboard with:
+  - Account balance overview
+  - Recent transactions
+  - User information display
+- Modular and reusable component architecture
+- Easy integration with backend APIs
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 🧰 Tech Stack
+
+| Layer      | Tools & Technologies                            |
+|------------|--------------------------------------------------|
+| Frontend   | Angular, TypeScript, HTML5, SCSS / Tailwind CSS |
+| Backend    | Node.js / Express.js                            |
+| Build Tool | Angular CLI                                     |
+| Styling    | SCSS / Tailwind                                 |
+
+---
+## 💡 Usage Guide
+
+After launching the project:
+-Login or create an account (if signup exists)
+-Access the Dashboard
+-View:
+  -Total balance
+  -Transaction history
+  -User profile info
+  -Navigate through the different sections using the sidebar/menu
+
+[**Click here for Demo**](https://speedo-rho.vercel.app/)
