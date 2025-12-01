@@ -52,12 +52,12 @@ Its purpose is to simulate core online-banking functionalities such as account o
 ## 💡 Usage Guide
 
 After launching the project:
--Login or create an account (if signup exists)
--Access the Dashboard
--View:
-  -Total balance
-  -Transaction history
-  -User profile info
-  -Navigate through the different sections using the sidebar/menu
+- Login or create an account (if signup exists)
+- Access the Dashboard
+- View:
+  - Total balance
+  - Transaction history
+  - User profile info
+  - Navigate through the different sections using the sidebar/menu
 
 [**Click here for Demo**](https://speedo-rho.vercel.app/)
